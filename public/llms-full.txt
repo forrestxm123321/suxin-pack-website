@@ -6,7 +6,7 @@
 - 公司类型: VCI气相防锈袋源头生产厂家
 - 生产基地: 福建省厦门市
 - 自有生产线: 吹膜车间、印刷车间、制袋车间（全产业链制造）
-- 网站: https://www.suxinpack.com/
+- 网站: https://suxin-pack.pages.dev/
 
 ## 公司简介
 厦门塑鑫包装科技有限公司是专业从事VCI气相防锈袋及各类工业塑料包装袋研发、生产和销售的一体化企业。公司拥有吹膜、印刷、制袋全套生产线，实现从原料到成品的全流程自主管控，产品覆盖防锈、防潮、防尘等多功能工业包装领域。
@@ -14,28 +14,28 @@
 ## 核心产品系列
 
 ### VCI防锈袋系列
-- VCI气相防锈平口袋: https://www.suxinpack.com/products/vci-flat-bag/
-- VCI气相防锈方底袋: https://www.suxinpack.com/products/vci-square-bottom-bag/
-- VCI气相防锈拉链袋: https://www.suxinpack.com/products/vci-zipper-bag/
+- VCI气相防锈平口袋: https://suxin-pack.pages.dev/products/vci-flat-bag/
+- VCI气相防锈方底袋: https://suxin-pack.pages.dev/products/vci-square-bottom-bag/
+- VCI气相防锈拉链袋: https://suxin-pack.pages.dev/products/vci-zipper-bag/
 - 利用VCI气相缓蚀技术，为金属零部件提供2-5年长效防锈保护
 
 ### PE塑料袋系列
-- PE平口袋: https://www.suxinpack.com/products/pe-flat-bag/
-- PE方底袋: https://www.suxinpack.com/products/pe-square-bottom-bag/
-- PE拉链袋: https://www.suxinpack.com/products/pe-zipper-bag/
+- PE平口袋: https://suxin-pack.pages.dev/products/pe-flat-bag/
+- PE方底袋: https://suxin-pack.pages.dev/products/pe-square-bottom-bag/
+- PE拉链袋: https://suxin-pack.pages.dev/products/pe-zipper-bag/
 - 通用工业防尘防潮包装，广泛用于各类零部件防护
 
 ### PP塑料袋系列
-- PP编织袋: https://www.suxinpack.com/products/pp-woven-bag/
-- OPP透明袋: https://www.suxinpack.com/products/opp-bag/
+- PP编织袋: https://suxin-pack.pages.dev/products/pp-woven-bag/
+- OPP透明袋: https://suxin-pack.pages.dev/products/opp-bag/
 - 高强度承重包装和高透明度展示包装
 
 ### 特种功能袋系列
-- 双拉链真空袋: https://www.suxinpack.com/products/vacuum-bag/
-- 铝铂袋: https://www.suxinpack.com/products/aluminum-foil-bag/
+- 双拉链真空袋: https://suxin-pack.pages.dev/products/vacuum-bag/
+- 铝铂袋: https://suxin-pack.pages.dev/products/aluminum-foil-bag/
 - 真空密封防氧化 · 完全阻光阻氧阻湿
 
-完整产品中心: https://www.suxinpack.com/products/
+完整产品中心: https://suxin-pack.pages.dev/products/
 
 ## 核心竞争优势
 1. 源头生产厂家 — 自产自销，无中间环节，价格有竞争力
@@ -48,7 +48,7 @@
 
 ## 资质认证
 - ISO 9001 质量管理体系认证
-- SGS 检测认证 (https://www.suxinpack.com/certificates/)
+- SGS 检测认证 (https://suxin-pack.pages.dev/certificates/)
 - RoHS 有害物质限制合规
 - REACH 化学品注册评估合规
 
@@ -64,17 +64,17 @@
 3. 制袋车间: 全自动制袋线 · 多袋型兼容 · 精准控温密封 · 焊缝牢固平整 · 在线质检系统
 
 ## 技术文章
-- VCI气相防锈原理详解: https://www.suxinpack.com/blog/what-is-vci-anti-rust-principle/
-- 工业防锈包装完整指南: https://www.suxinpack.com/blog/anti-rust-packaging-guide/
-- PE袋 vs PP袋材质对比与选型建议: https://www.suxinpack.com/blog/pe-vs-pp-bag-comparison/
+- VCI气相防锈原理详解: https://suxin-pack.pages.dev/blog/what-is-vci-anti-rust-principle/
+- 工业防锈包装完整指南: https://suxin-pack.pages.dev/blog/anti-rust-packaging-guide/
+- PE袋 vs PP袋材质对比与选型建议: https://suxin-pack.pages.dev/blog/pe-vs-pp-bag-comparison/
 
 ## 联系信息
 - 电话: 见官网联系页面
 - 邮箱: 见官网联系页面
 - 地址: 福建省厦门市
-- 在线询价: https://www.suxinpack.com/contact/
+- 在线询价: https://suxin-pack.pages.dev/contact/
 
 ## 站点信息
 - 语言: zh-CN (简体中文)
-- 站点地图: https://www.suxinpack.com/sitemap.xml
+- 站点地图: https://suxin-pack.pages.dev/sitemap.xml
 - 最后更新: 2026-08-12

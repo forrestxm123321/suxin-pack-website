@@ -3,113 +3,113 @@
         xmlns:mobile="http://www.baidu.com/schemas/sitemap-mobile/1/">
   <!-- 首页 -->
   <url>
-    <loc>https://www.suxinpack.com/</loc>
+    <loc>https://suxin-pack.pages.dev/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <!-- 产品中心 -->
   <url>
-    <loc>https://www.suxinpack.com/products/</loc>
+    <loc>https://suxin-pack.pages.dev/products/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <!-- 客户案例 -->
   <url>
-    <loc>https://www.suxinpack.com/cases/</loc>
+    <loc>https://suxin-pack.pages.dev/cases/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <!-- 关于我们 -->
   <url>
-    <loc>https://www.suxinpack.com/about/</loc>
+    <loc>https://suxin-pack.pages.dev/about/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <!-- 资质证书 -->
   <url>
-    <loc>https://www.suxinpack.com/certificates/</loc>
+    <loc>https://suxin-pack.pages.dev/certificates/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <!-- 联系我们 -->
   <url>
-    <loc>https://www.suxinpack.com/contact/</loc>
+    <loc>https://suxin-pack.pages.dev/contact/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <!-- 技术文章列表 -->
   <url>
-    <loc>https://www.suxinpack.com/blog/</loc>
+    <loc>https://suxin-pack.pages.dev/blog/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <!-- 技术文章详情 -->
   <url>
-    <loc>https://www.suxinpack.com/blog/what-is-vci-anti-rust-principle/</loc>
+    <loc>https://suxin-pack.pages.dev/blog/what-is-vci-anti-rust-principle/</loc>
     <lastmod>2026-06-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.suxinpack.com/blog/anti-rust-packaging-guide/</loc>
+    <loc>https://suxin-pack.pages.dev/blog/anti-rust-packaging-guide/</loc>
     <lastmod>2026-07-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.suxinpack.com/blog/pe-vs-pp-bag-comparison/</loc>
+    <loc>https://suxin-pack.pages.dev/blog/pe-vs-pp-bag-comparison/</loc>
     <lastmod>2026-07-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <!-- 产品详情页 -->
   <url>
-    <loc>https://www.suxinpack.com/products/vci-flat-bag/</loc>
+    <loc>https://suxin-pack.pages.dev/products/vci-flat-bag/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.suxinpack.com/products/vci-square-bottom-bag/</loc>
+    <loc>https://suxin-pack.pages.dev/products/vci-square-bottom-bag/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.suxinpack.com/products/vci-zipper-bag/</loc>
+    <loc>https://suxin-pack.pages.dev/products/vci-zipper-bag/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.suxinpack.com/products/pe-flat-bag/</loc>
+    <loc>https://suxin-pack.pages.dev/products/pe-flat-bag/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.suxinpack.com/products/pe-square-bottom-bag/</loc>
+    <loc>https://suxin-pack.pages.dev/products/pe-square-bottom-bag/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.suxinpack.com/products/pe-zipper-bag/</loc>
+    <loc>https://suxin-pack.pages.dev/products/pe-zipper-bag/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.suxinpack.com/products/pp-woven-bag/</loc>
+    <loc>https://suxin-pack.pages.dev/products/pp-woven-bag/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.suxinpack.com/products/opp-bag/</loc>
+    <loc>https://suxin-pack.pages.dev/products/opp-bag/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.suxinpack.com/products/vacuum-bag/</loc>
+    <loc>https://suxin-pack.pages.dev/products/vacuum-bag/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.suxinpack.com/products/aluminum-foil-bag/</loc>
+    <loc>https://suxin-pack.pages.dev/products/aluminum-foil-bag/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

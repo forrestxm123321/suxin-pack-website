@@ -88,4 +88,4 @@ Disallow: /api/
 Disallow: /functions/
 
 # --- 站点地图 ---
-Sitemap: https://www.suxinpack.com/sitemap.xml
+Sitemap: https://suxin-pack.pages.dev/sitemap.xml
