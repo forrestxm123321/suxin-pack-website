@@ -1,49 +1,52 @@
 {
   "SITE": {
+    "areaServed": [
+      "厦漳泉",
+      "福建省",
+      "全国",
+      "全球出口"
+    ],
+    "phone2": "18606009247",
+    "numberOfEmployees": {
+      "minValue": 20,
+      "maxValue": 50
+    },
+    "alternateName": [
+      "Xiamen Suxin Packaging Technology Co., Ltd.",
+      "塑鑫包装",
+      "厦门塑鑫"
+    ],
     "shortName": "厦门塑鑫包装科技有限公司",
     "logo": "",
     "name": "厦门塑鑫包装科技有限公司",
-    "alternateName": ["Xiamen Suxin Packaging Technology Co., Ltd.", "塑鑫包装", "厦门塑鑫"],
+    "paymentAccepted": "Bank Transfer, WeChat Pay, Alipay",
+    "foundingDate": "2019-12",
     "phone": "13606915870",
-    "phone2": "18606009247",
     "tagline": "VCI气相防锈袋源头生产厂家",
     "url": "https://suxin-pack.pages.dev/",
-    "foundingDate": "2019-12",
-    "foundingLocation": "厦门",
-    "areaServed": ["厦漳泉", "福建省", "全国", "全球出口"],
-    "priceRange": "¥0.1-50",
-    "currenciesAccepted": "CNY",
-    "paymentAccepted": "Bank Transfer, WeChat Pay, Alipay",
     "companyIntro": "厦门塑鑫包装科技有限公司是VCI气相防锈袋源头生产厂家。公司自有吹膜、印刷、制袋全套生产线。\n主营防锈平口袋、防锈方底袋、空白方底袋、平口袋、拉链袋、双拉链真空袋、铝铂袋及各种工业包装袋。\n专为汽配，新能源，五金，模具，电箱，电柜，工程机械等行业提供防锈，防潮，防尘包装方案。\n环保合规适配出口，自产自销、交期快、价格实在，一站式工业包装解决方案提供商。",
     "notificationEmail": "58704395@qq.com",
-    "address": "福建省厦门市同安区同安园178号4楼",
-    "icp": "",
-    "sgsCertificate": "",
     "geo": {
       "latitude": 24.72,
       "longitude": 118.15
     },
+    "priceRange": "¥0.1-50",
+    "address": "福建省厦门市同安区同安园178号4楼",
+    "foundingLocation": "厦门",
+    "currenciesAccepted": "CNY",
+    "icp": "",
     "openingHours": {
-      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+      "dayOfWeek": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday"
+      ],
       "opens": "08:00",
       "closes": "18:00"
     },
-    "numberOfEmployees": { "minValue": 20, "maxValue": 50 },
-    "sameAs": [],
-    "certificates": [
-      {
-        "name": "SGS塑料包装检测报告",
-        "image": "/images/uploads/xmin2605001300pc01_cn.pdf",
-        "desc": "SGS塑料包装检测报告"
-      },
-      {
-        "name": "SGS VCI气相防锈检测报告",
-        "image": "/images/uploads/xmin2605001298pc01_cn.pdf",
-        "desc": "SGS VCI气相防锈检测报告"
-      }
-    ],
-    "email": "info@suxinpack.com",
-    "description": "厦门塑鑫包装科技有限公司是专业VCI气相防锈袋源头生产厂家，自有吹膜、印刷、制袋全套生产线。主营防锈平口袋、防锈方底袋、PE袋、PP袋、拉链袋、真空袋、铝铂袋等工业包装袋，为汽配、新能源、五金、模具等行业提供一站式工业包装解决方案。",
     "faqQuestions": [
       {
         "question": "VCI防锈袋的防锈原理是什么？能防锈多久？",
@@ -85,57 +88,222 @@
         "question": "铝铂袋适用于什么场景？和普通PE袋相比有什么优势？",
         "answer": "铝铂（铝箔）袋具有阻光、防潮、防静电三大特性。适用于PCB板、IC芯片、LED灯珠、精密仪器、光伏组件等需要避光防潮的包装场景。相比普通PE袋，铝铂袋可完全阻隔光线和氧气渗透，防潮防氧化效果远超PE袋。厚度可选0.1mm-0.2mm，尺寸按需定制。"
       }
-    ]
+    ],
+    "sameAs": [],
+    "sgsCertificate": "",
+    "certificates": [
+      {
+        "name": "SGS塑料包装检测报告",
+        "image": "/images/uploads/xmin2605001300pc01_cn.pdf",
+        "desc": "SGS塑料包装检测报告"
+      },
+      {
+        "name": "SGS VCI气相防锈检测报告",
+        "image": "/images/uploads/xmin2605001298pc01_cn.pdf",
+        "desc": "SGS VCI气相防锈检测报告"
+      }
+    ],
+    "email": "info@suxinpack.com",
+    "description": "厦门塑鑫包装科技有限公司是专业VCI气相防锈袋源头生产厂家，自有吹膜、印刷、制袋全套生产线。主营防锈平口袋、防锈方底袋、PE袋、PP袋、拉链袋、真空袋、铝铂袋等工业包装袋，为汽配、新能源、五金、模具等行业提供一站式工业包装解决方案。"
   },
   "NAV_LINKS": [
-    { "label": "首页", "href": "/" },
-    { "label": "产品中心", "href": "/products/", "children": [
-      { "label": "VCI防锈袋系列", "href": "/products/#vci-rustproof" },
-      { "label": "PE塑料袋系列", "href": "/products/#pe-bag" },
-      { "label": "PP塑料袋系列", "href": "/products/#pp-bag" },
-      { "label": "特种功能袋系列", "href": "/products/#specialty" }
-    ]},
-    { "label": "客户案例", "href": "/cases/" },
-    { "label": "关于我们", "href": "/about/" },
-    { "label": "技术文章", "href": "/blog/" },
-    { "label": "常见问题", "href": "/faq/" },
-    { "label": "联系我们", "href": "/contact/" }
+    {
+      "label": "首页",
+      "href": "/"
+    },
+    {
+      "label": "产品中心",
+      "href": "/products/",
+      "children": [
+        {
+          "label": "VCI防锈袋系列",
+          "href": "/products/#vci-rustproof"
+        },
+        {
+          "label": "PE塑料袋系列",
+          "href": "/products/#pe-bag"
+        },
+        {
+          "label": "PP塑料袋系列",
+          "href": "/products/#pp-bag"
+        },
+        {
+          "label": "特种功能袋系列",
+          "href": "/products/#specialty"
+        }
+      ]
+    },
+    {
+      "label": "客户案例",
+      "href": "/cases/"
+    },
+    {
+      "label": "关于我们",
+      "href": "/about/"
+    },
+    {
+      "label": "技术文章",
+      "href": "/blog/"
+    },
+    {
+      "label": "常见问题",
+      "href": "/faq/"
+    },
+    {
+      "label": "联系我们",
+      "href": "/contact/"
+    }
   ],
   "ADVANTAGES": [
-    { "icon": "factory", "title": "源头生产厂家", "description": "自有吹膜、印刷、制袋全套生产线，自产自销，省去中间环节，价格实在。" },
-    { "icon": "shield", "title": "VCI防锈技术", "description": "专业气相防锈包装技术，为金属零部件提供长效防锈保护，替代传统涂油工艺。" },
-    { "icon": "truck", "title": "交期快速", "description": "全链条自主生产，产能充足，响应迅速，常规订单快至3-5天交付。" },
-    { "icon": "leaf", "title": "环保合规出口", "description": "产品符合RoHS、REACH、SGS等国际环保标准，适配出口需求，助力企业绿色供应链。" },
-    { "icon": "tools", "title": "一站式解决方案", "description": "覆盖防锈、防潮、防尘全场景包装需求，提供定制化尺寸、厚度、印刷方案。" },
-    { "icon": "badge", "title": "品质可靠", "description": "严选原料，全程品控，产品性能稳定可靠，服务汽配、新能源等行业头部客户。" }
+    {
+      "icon": "factory",
+      "title": "源头生产厂家",
+      "description": "自有吹膜、印刷、制袋全套生产线，自产自销，省去中间环节，价格实在。"
+    },
+    {
+      "icon": "shield",
+      "title": "VCI防锈技术",
+      "description": "专业气相防锈包装技术，为金属零部件提供长效防锈保护，替代传统涂油工艺。"
+    },
+    {
+      "icon": "truck",
+      "title": "交期快速",
+      "description": "全链条自主生产，产能充足，响应迅速，常规订单快至3-5天交付。"
+    },
+    {
+      "icon": "leaf",
+      "title": "环保合规出口",
+      "description": "产品符合RoHS、REACH、SGS等国际环保标准，适配出口需求，助力企业绿色供应链。"
+    },
+    {
+      "icon": "tools",
+      "title": "一站式解决方案",
+      "description": "覆盖防锈、防潮、防尘全场景包装需求，提供定制化尺寸、厚度、印刷方案。"
+    },
+    {
+      "icon": "badge",
+      "title": "品质可靠",
+      "description": "严选原料，全程品控，产品性能稳定可靠，服务汽配、新能源等行业头部客户。"
+    }
   ],
   "COMPANY_STATS": [
-    { "value": "10+", "label": "年行业经验" },
-    { "value": "5000+", "label": "厂房面积（㎡）" },
-    { "value": "1000+", "label": "服务客户数" },
-    { "value": "99.8%", "label": "客户满意度" }
+    {
+      "value": "10+",
+      "label": "年行业经验"
+    },
+    {
+      "value": "5000+",
+      "label": "厂房面积（㎡）"
+    },
+    {
+      "value": "1000+",
+      "label": "服务客户数"
+    },
+    {
+      "value": "99.8%",
+      "label": "客户满意度"
+    }
   ],
   "PRODUCTION_FLOW": [
-    { "step": "01", "title": "原料检验", "desc": "精选优质LDPE/HDPE原料，VCI防锈剂严格检测入厂" },
-    { "step": "02", "title": "吹膜成型", "desc": "多层共挤吹膜，VCI在线添加，精确控制薄膜厚度和性能" },
-    { "step": "03", "title": "印刷定制", "desc": "高速柔版印刷，支持单色至多色，Logo和产品信息清晰牢固" },
-    { "step": "04", "title": "制袋成型", "desc": "全自动制袋生产线，平口袋/方底袋/拉链袋/真空袋多袋型兼容" },
-    { "step": "05", "title": "质量检测", "desc": "在线质检+抽检双保险，焊缝强度、厚度均匀性、防锈性能逐项把关" },
-    { "step": "06", "title": "打包出货", "desc": "标准化打包，标签清晰，快速物流直达客户" }
+    {
+      "step": "01",
+      "title": "原料检验",
+      "desc": "精选优质LDPE/HDPE原料，VCI防锈剂严格检测入厂"
+    },
+    {
+      "step": "02",
+      "title": "吹膜成型",
+      "desc": "多层共挤吹膜，VCI在线添加，精确控制薄膜厚度和性能"
+    },
+    {
+      "step": "03",
+      "title": "印刷定制",
+      "desc": "高速柔版印刷，支持单色至多色，Logo和产品信息清晰牢固"
+    },
+    {
+      "step": "04",
+      "title": "制袋成型",
+      "desc": "全自动制袋生产线，平口袋/方底袋/拉链袋/真空袋多袋型兼容"
+    },
+    {
+      "step": "05",
+      "title": "质量检测",
+      "desc": "在线质检+抽检双保险，焊缝强度、厚度均匀性、防锈性能逐项把关"
+    },
+    {
+      "step": "06",
+      "title": "打包出货",
+      "desc": "标准化打包，标签清晰，快速物流直达客户"
+    }
   ],
   "INDUSTRIES": [
-    { "name": "汽车零部件", "icon": "car", "desc": "发动机缸体、变速器齿轮、刹车盘、轴承防锈包装" },
-    { "name": "新能源电池", "icon": "battery", "desc": "电池极片、汇流排、电池壳体防锈防潮保护" },
-    { "name": "五金工具", "icon": "wrench", "desc": "螺丝螺母、弹簧、刀具、量具通用防锈包装" },
-    { "name": "精密模具", "icon": "cube", "desc": "注塑模具、冲压模具封存防锈方案" },
-    { "name": "电箱电柜", "icon": "bolt", "desc": "铜排、接线端子、开关器件防锈防尘包装" },
-    { "name": "工程机械", "icon": "cog", "desc": "液压缸、活塞杆、大型齿轮出口防锈包装" }
+    {
+      "name": "汽车零部件",
+      "icon": "car",
+      "desc": "发动机缸体、变速器齿轮、刹车盘、轴承防锈包装"
+    },
+    {
+      "name": "新能源电池",
+      "icon": "battery",
+      "desc": "电池极片、汇流排、电池壳体防锈防潮保护"
+    },
+    {
+      "name": "五金工具",
+      "icon": "wrench",
+      "desc": "螺丝螺母、弹簧、刀具、量具通用防锈包装"
+    },
+    {
+      "name": "精密模具",
+      "icon": "cube",
+      "desc": "注塑模具、冲压模具封存防锈方案"
+    },
+    {
+      "name": "电箱电柜",
+      "icon": "bolt",
+      "desc": "铜排、接线端子、开关器件防锈防尘包装"
+    },
+    {
+      "name": "工程机械",
+      "icon": "cog",
+      "desc": "液压缸、活塞杆、大型齿轮出口防锈包装"
+    }
   ],
   "KEYWORDS": [
-    "VCI气相防锈袋", "防锈塑料包装袋", "防锈平口袋", "防锈方底袋",
-    "PE袋", "PP袋", "工业包装袋", "塑料包装袋厂家", "厦门塑鑫包装",
-    "拉链袋", "真空袋", "铝铂袋", "气相防锈包装", "防潮防锈包装",
-    "五金防锈包装", "汽车零部件防锈", "新能源防锈包装", "厦门塑鑫",
-    "气相防锈袋", "防锈袋", "厦门塑料袋", "厦门塑料包装"
+    "VCI气相防锈袋",
+    "防锈塑料包装袋",
+    "防锈平口袋",
+    "防锈方底袋",
+    "PE袋",
+    "PP袋",
+    "工业包装袋",
+    "塑料包装袋厂家",
+    "厦门塑鑫包装",
+    "拉链袋",
+    "真空袋",
+    "铝铂袋",
+    "气相防锈包装",
+    "防潮防锈包装",
+    "五金防锈包装",
+    "汽车零部件防锈",
+    "新能源防锈包装",
+    "厦门塑鑫",
+    "气相防锈袋",
+    "防锈袋",
+    "厦门塑料袋",
+    "厦门塑料包装",
+    "厦门塑鑫",
+    "厦门塑鑫包装"
+  ],
+  "certificates": [
+    {
+      "image": "/images/uploads/xmin2605001298pc01_cn.pdf",
+      "name": "SGS VCI气相防锈袋检测报告",
+      "desc": "SGS VCI气相防锈袋检测报告"
+    },
+    {
+      "image": "/images/uploads/xmin2605001300pc01_cn.pdf",
+      "name": "SGS 塑料袋检测报告",
+      "desc": "SGS 塑料袋检测报告"
+    }
   ]
 }
