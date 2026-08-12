@@ -1,0 +1,200 @@
+---
+/**
+ * 导航栏组件 - 响应式导航 + 产品下拉菜单 + 移动端折叠菜单
+ */
+import siteData from '../data/site.json';
+const { NAV_LINKS, SITE } = siteData;
+const currentPath = Astro.url.pathname;
+---
+
+<header class="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-100 shadow-sm">
+  <div class="container-page">
+    <nav class="flex items-center justify-between h-16" aria-label="主导航">
+      <!-- Logo -->
+      <a href="/" class="flex items-center gap-2.5 shrink-0 group" title={SITE.name}>
+        {SITE.logo ? (
+          <img src={SITE.logo} alt={SITE.shortName} class="h-9 w-auto object-contain" loading="eager" />
+        ) : (
+          <div class="w-9 h-9 bg-gradient-to-br from-primary-600 to-primary-500 rounded-xl flex items-center justify-center shadow-sm group-hover:shadow-md transition-shadow">
+            <span class="text-white font-bold text-base">塑</span>
+          </div>
+        )}
+        <div class="hidden sm:block">
+          <div class="text-sm font-bold text-gray-900 leading-tight">{SITE.shortName}</div>
+          <div class="text-xs text-gray-400 leading-tight">{SITE.tagline}</div>
+        </div>
+      </a>
+
+      <!-- 桌面导航 -->
+      <ul class="hidden lg:flex items-center gap-0.5">
+        {NAV_LINKS.map((link) => {
+          const isActive = currentPath === link.href || (link.href !== '/' && currentPath.startsWith(link.href));
+          const hasChildren = 'children' in link && link.children && link.children.length > 0;
+
+          if (hasChildren) {
+            return (
+              <li class="relative group/dropdown">
+                <a
+                  href={link.href}
+                  class={`flex items-center gap-1 px-3.5 py-2 rounded-lg text-sm font-medium transition-all duration-200 relative ${
+                    isActive
+                      ? 'text-white bg-primary-600 shadow-sm'
+                      : 'text-gray-700 hover:text-primary-600 hover:bg-gray-50'
+                  }`}
+                >
+                  {link.label}
+                  <svg class="w-3.5 h-3.5 opacity-50 group-hover/dropdown:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </a>
+                <!-- 下拉菜单 -->
+                <div class="absolute top-full left-0 mt-2 w-52 bg-white rounded-2xl border border-gray-100 shadow-elevated opacity-0 invisible group-hover/dropdown:opacity-100 group-hover/dropdown:visible transition-all duration-200 py-2 z-50">
+                  {link.children.map((child) => (
+                    <a
+                      href={child.href}
+                      class="block px-4 py-2.5 text-sm text-gray-600 hover:text-primary-700 hover:bg-primary-50 transition-colors"
+                    >
+                      {child.label}
+                    </a>
+                  ))}
+                  <div class="border-t border-gray-100 mt-1 pt-1">
+                    <a
+                      href={link.href}
+                      class="block px-4 py-2.5 text-sm font-medium text-primary-600 hover:text-primary-700 hover:bg-primary-50 transition-colors"
+                    >
+                      查看全部产品 →
+                    </a>
+                  </div>
+                </div>
+              </li>
+            );
+          }
+
+          return (
+            <li>
+              <a
+                href={link.href}
+                class={`px-3.5 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
+                  isActive
+                    ? 'text-white bg-primary-600 shadow-sm'
+                    : 'text-gray-700 hover:text-primary-600 hover:bg-gray-50'
+                }`}
+              >
+                {link.label}
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+
+      <!-- 右侧 CTA + 移动端菜单按钮 -->
+      <div class="flex items-center gap-3">
+        <a href="/contact/" class="hidden sm:inline-flex btn-primary text-sm !py-2 !px-5 shadow-[0_0_12px_rgba(37,99,235,0.3)] hover:shadow-[0_0_20px_rgba(37,99,235,0.45)] transition-shadow duration-300">
+          获取报价
+        </a>
+
+        <!-- 移动端汉堡菜单按钮 -->
+        <button
+          id="mobile-menu-btn"
+          class="lg:hidden p-2 rounded-lg text-gray-600 hover:bg-gray-100 transition-colors"
+          aria-label="打开菜单"
+          aria-expanded="false"
+        >
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path id="menu-icon-open" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            <path id="menu-icon-close" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" class="hidden" />
+          </svg>
+        </button>
+      </div>
+    </nav>
+  </div>
+
+  <!-- 移动端下拉菜单 -->
+  <div id="mobile-menu" class="hidden lg:hidden border-t border-gray-100 bg-white max-h-[80vh] overflow-y-auto">
+    <div class="container-page py-3 space-y-0.5">
+      {NAV_LINKS.map((link) => {
+        const isActive = currentPath === link.href || (link.href !== '/' && currentPath.startsWith(link.href));
+        const hasChildren = 'children' in link && link.children && link.children.length > 0;
+
+        if (hasChildren) {
+          return (
+            <div class="mobile-dropdown">
+              <button
+                class="mobile-dropdown-toggle w-full flex items-center justify-between px-4 py-3 rounded-lg text-sm font-medium text-gray-600 hover:text-primary-700 hover:bg-gray-50 transition-colors"
+                type="button"
+              >
+                <span>{link.label}</span>
+                <svg class="w-4 h-4 dropdown-arrow transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              <div class="mobile-dropdown-content hidden ml-4 border-l-2 border-gray-100 pl-2 mb-2">
+                {link.children.map((child) => (
+                  <a
+                    href={child.href}
+                    class="block px-4 py-2.5 text-sm text-gray-500 hover:text-primary-700 hover:bg-primary-50 rounded-lg transition-colors"
+                  >
+                    {child.label}
+                  </a>
+                ))}
+                <a
+                  href={link.href}
+                  class="block px-4 py-2.5 text-sm font-medium text-primary-600 hover:bg-primary-50 rounded-lg transition-colors"
+                >
+                  查看全部产品 →
+                </a>
+              </div>
+            </div>
+          );
+        }
+
+        return (
+          <a
+            href={link.href}
+            class={`block px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200 ${
+              isActive
+                ? 'text-white bg-primary-600 shadow-sm'
+                : 'text-gray-600 hover:text-primary-600 hover:bg-gray-50'
+            }`}
+          >
+            {link.label}
+          </a>
+        );
+      })}
+      <a href="/contact/" class="block mt-3 text-center btn-primary text-sm shadow-sm">
+        获取报价
+      </a>
+    </div>
+  </div>
+</header>
+
+<script>
+  // 移动端菜单总开关
+  const btn = document.getElementById('mobile-menu-btn');
+  const menu = document.getElementById('mobile-menu');
+  const iconOpen = document.getElementById('menu-icon-open');
+  const iconClose = document.getElementById('menu-icon-close');
+
+  if (btn && menu) {
+    btn.addEventListener('click', () => {
+      const isOpen = menu.classList.toggle('hidden');
+      btn.setAttribute('aria-expanded', String(!isOpen));
+      if (iconOpen && iconClose) {
+        iconOpen.classList.toggle('hidden');
+        iconClose.classList.toggle('hidden');
+      }
+    });
+  }
+
+  // 移动端下拉折叠
+  document.querySelectorAll('.mobile-dropdown-toggle').forEach((toggle) => {
+    toggle.addEventListener('click', () => {
+      const content = toggle.nextElementSibling;
+      const arrow = toggle.querySelector('.dropdown-arrow');
+      if (content) {
+        content.classList.toggle('hidden');
+        if (arrow) arrow.classList.toggle('rotate-180');
+      }
+    });
+  });
+</script>

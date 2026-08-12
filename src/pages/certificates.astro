@@ -1,0 +1,132 @@
+---
+/**
+ * 资质证书页
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import siteData from '../data/site.json';
+const { SITE } = siteData;
+const certificates: Array<{name: string; image: string; desc: string}> = (siteData as any).certificates || [];
+
+const pageTitle = '资质证书_SGS认证_塑鑫包装';
+const pageDescription = '厦门塑鑫包装科技有限公司通过SGS检测认证、ISO 9001质量管理体系认证、RoHS和REACH等国际认证，产品符合欧盟环保标准，品质值得信赖。';
+const pageKeywords = ['SGS认证','ISO9001认证','RoHS认证','REACH认证','塑料包装袋认证','VCI防锈袋认证','资质证书'].join(', ');
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  keywords={pageKeywords}
+  canonicalURL="/certificates/"
+  ogType="website"
+  schemaTypes={[
+    { type: 'BreadcrumbList', data: { items: [{ label: '首页', href: '/' }, { label: '关于我们', href: '/about/' }, { label: '资质证书' }] } },
+  ]}
+>
+  <!-- Hero -->
+  <section class="bg-carbon-900 bg-gradient-to-br from-carbon-900 via-primary-950 to-primary-900 text-white py-12 sm:py-16 relative overflow-hidden">
+    <div class="absolute inset-0 bg-grid opacity-20"></div>
+    <div class="relative container-page text-center">
+      <span class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-1.5 text-sm font-medium mb-4 border border-white/10"><span class="w-1.5 h-1.5 bg-green-400 rounded-full"></span>资质证书</span>
+      <h1 class="text-3xl sm:text-4xl font-extrabold mb-3">国际权威认证</h1>
+      <p class="text-lg text-white/80 max-w-2xl mx-auto">产品通过多项国际检测认证，确保品质符合全球标准</p>
+    </div>
+  </section>
+
+  <!-- 面包屑 -->
+  <div class="bg-gray-50 border-b border-gray-100">
+    <div class="container-page py-3">
+      <nav class="breadcrumb">
+        <a href="/">首页</a>
+        <svg class="sep" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        <a href="/about/">关于我们</a>
+        <svg class="sep" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        <span class="text-gray-600 font-medium">资质证书</span>
+      </nav>
+    </div>
+  </div>
+
+  <!-- 证书列表 -->
+  <section class="section-sm">
+    <div class="container-page">
+      {
+        certificates.length > 0 ? (
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {certificates.map((cert) => (
+              <div class="bg-white rounded-3xl border border-gray-100 shadow-card overflow-hidden">
+                <!-- 证书文件 -->
+                <div class="relative bg-gray-50 flex items-center justify-center p-8 border-b border-gray-100 min-h-[400px]">
+                  {cert.image.endsWith('.pdf') ? (
+                    <div class="w-full h-[500px] flex flex-col items-center justify-center gap-4">
+                      <iframe src={cert.image} class="w-full h-full rounded-lg shadow-lg" title={cert.name}>
+                        <p>您的浏览器不支持PDF预览，请下载后查看。</p>
+                      </iframe>
+                      <a href={cert.image} download class="inline-flex items-center gap-2 px-6 py-3 bg-primary-600 text-white rounded-2xl font-bold hover:bg-primary-700 transition-colors shadow-lg">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                        下载 PDF 证书
+                      </a>
+                    </div>
+                  ) : (
+                    <img
+                      src={cert.image}
+                      alt={cert.name}
+                      class="max-w-full max-h-[500px] object-contain shadow-lg rounded-lg"
+                      loading="lazy"
+                      onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"
+                    />
+                  )}
+                  <div class="hidden flex-col items-center justify-center text-gray-400 gap-3">
+                    <svg class="w-16 h-16 opacity-30" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                    <span class="text-sm">证书文件加载中...</span>
+                  </div>
+                </div>
+                <!-- 证书说明 -->
+                <div class="p-6">
+                  <div class="flex items-center gap-3 mb-3">
+                    <div class="w-10 h-10 rounded-xl bg-green-100 flex items-center justify-center text-xl">🏅</div>
+                    <h2 class="text-xl font-extrabold text-gray-900">{cert.name}</h2>
+                  </div>
+                  <p class="text-gray-600 leading-relaxed">{cert.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div class="text-center py-16 text-gray-400">
+            <div class="text-6xl mb-4">🏅</div>
+            <p class="text-lg">证书资料上传中，敬请期待</p>
+          </div>
+        )
+      }
+    </div>
+  </section>
+
+  <!-- 认证体系说明 -->
+  <section class="section-sm bg-gray-50/50">
+    <div class="container-page">
+      <h2 class="text-2xl font-extrabold text-gray-900 mb-8 text-center">认证体系说明</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        {[
+          { name: 'SGS 检测认证', icon: '🔬', desc: '全球领先的检验、鉴定、测试和认证机构SGS出具的产品检测报告，确保产品安全合规。' },
+          { name: 'ISO 9001', icon: '📋', desc: '国际标准化组织质量管理体系认证，生产全过程品质可控。' },
+          { name: 'RoHS 合规', icon: '🌿', desc: '符合欧盟RoHS指令，铅、汞、镉等有害物质含量远低于限值。' },
+          { name: 'REACH 合规', icon: '✅', desc: '符合欧盟REACH法规，化学品安全使用，适配出口欧盟市场。' },
+        ].map((item) => (
+          <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-card">
+            <div class="text-4xl mb-3">{item.icon}</div>
+            <h3 class="font-bold text-gray-900 mb-2">{item.name}</h3>
+            <p class="text-sm text-gray-500 leading-relaxed">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section bg-gradient-to-r from-primary-600 via-primary-700 to-primary-800 text-white">
+    <div class="container-page text-center">
+      <h2 class="text-2xl sm:text-3xl font-extrabold mb-3">需要查看其他资质文件？</h2>
+      <p class="text-white/70 mb-8 max-w-lg mx-auto">联系我们获取完整的认证资料包，包括SGS检测报告、ISO体系证书等。</p>
+      <a href="/contact/" class="btn-white !text-primary-700 text-lg px-10 py-4 rounded-2xl font-bold shadow-lg">联系我们</a>
+    </div>
+  </section>
+</BaseLayout>

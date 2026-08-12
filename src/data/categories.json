@@ -1,0 +1,8 @@
+{
+  "categories": [
+    { "id": "vci-rustproof", "label": "VCI防锈袋系列", "icon": "shield" },
+    { "id": "pe-bag", "label": "PE塑料袋系列", "icon": "package" },
+    { "id": "pp-bag", "label": "PP塑料袋系列", "icon": "layers" },
+    { "id": "specialty", "label": "特种功能袋系列", "icon": "star" }
+  ]
+}

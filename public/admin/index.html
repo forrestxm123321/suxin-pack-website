@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>内容管理后台 — 塑鑫包装</title>
+  <style>
+    body { margin: 0; background: #f1f5f9; }
+    #nc-root { position: relative; z-index: 1; min-height: 100vh; }
+    .loading {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      min-height: 100vh; font-family: system-ui, sans-serif; color: #64748b;
+    }
+    .loading .spinner {
+      width: 40px; height: 40px; border: 3px solid #e2e8f0;
+      border-top-color: #2563eb; border-radius: 50%;
+      animation: spin 0.8s linear infinite; margin-bottom: 16px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    #debug-panel {
+      position: fixed; bottom: 0; left: 0; right: 0; max-height: 45vh;
+      background: #1e293b; color: #e2e8f0; font-family: monospace; font-size: 11px;
+      overflow-y: auto; padding: 12px 16px; z-index: 99999; display: none;
+      border-top: 2px solid #f59e0b; white-space: pre-wrap; word-break: break-all;
+    }
+    #debug-panel.show { display: block; }
+    #debug-panel .error { color: #f87171; }
+    #debug-panel .warn { color: #fbbf24; }
+    #debug-panel .info { color: #60a5fa; }
+    #debug-panel .success { color: #4ade80; }
+    #debug-panel .highlight { color: #f59e0b; font-weight: bold; }
+    #debug-toggle {
+      position: fixed; bottom: 8px; right: 8px; z-index: 100000;
+      background: #1e293b; color: #f59e0b; border: 1px solid #475569;
+      padding: 4px 12px; border-radius: 4px; cursor: pointer; font-size: 11px;
+    }
+  </style>
+</head>
+<body>
+  <div id="nc-root"></div>
+  <div id="loading" class="loading">
+    <div class="spinner"></div>
+    <p>内容管理系统加载中...</p>
+  </div>
+
+  <a href="/admin/submissions.html" style="position:fixed;bottom:8px;right:80px;z-index:100000;background:#2563eb;color:#fff;border:none;padding:4px 12px;border-radius:4px;cursor:pointer;font-size:11px;text-decoration:none;font-family:system-ui,sans-serif">📨 询价记录</a>
+  <button id="debug-toggle" onclick="toggleDebug()">Debug</button>
+  <div id="debug-panel"></div>
+
+  <script>
+    // ===== Comprehensive Debug Logging =====
+    var debugLogs = [];
+    function log(msg, type) {
+      type = type || 'info';
+      var time = new Date().toLocaleTimeString();
+      var entry = '[' + time + '] ' + msg;
+      debugLogs.push({ entry: entry, type: type });
+      var panel = document.getElementById('debug-panel');
+      if (panel) {
+        panel.innerHTML = debugLogs.map(function(d) {
+          return '<div class="' + d.type + '">' + d.entry + '</div>';
+        }).join('');
+        panel.scrollTop = panel.scrollHeight;
+      }
+      console.log('[CMS Debug]', msg);
+    }
+    function toggleDebug() {
+      var panel = document.getElementById('debug-panel');
+      panel.classList.toggle('show');
+    }
+
+    // 全局错误捕获
+    window.onerror = function(msg, url, line, col, err) {
+      log('JS ERROR: ' + msg + ' at ' + url + ':' + line + ':' + col, 'error');
+      if (err && err.stack) log('STACK: ' + err.stack, 'error');
+    };
+    window.addEventListener('unhandledrejection', function(e) {
+      log('PROMISE ERROR: ' + (e.reason ? (e.reason.message || String(e.reason)) : 'unknown'), 'error');
+      if (e.reason && e.reason.stack) log('STACK: ' + e.reason.stack, 'error');
+    });
+
+    // 拦截 fetch
+    var origFetch = window.fetch;
+    window.fetch = function() {
+      var args = arguments;
+      var url = typeof args[0] === 'string' ? args[0] : (args[0] && args[0].url ? args[0].url : 'unknown');
+      log('FETCH: ' + url, 'info');
+      return origFetch.apply(this, args).then(function(resp) {
+        var cloneUrl = url;
+        if (!resp.ok) {
+          log('FETCH FAIL [' + resp.status + ']: ' + cloneUrl, 'error');
+        } else {
+          log('FETCH OK [' + resp.status + ']: ' + cloneUrl, 'success');
+        }
+        return resp;
+      }).catch(function(err) {
+        log('FETCH NET ERR: ' + url + ' - ' + err.message, 'error');
+        throw err;
+      });
+    };
+
+    // 拦截 XMLHttpRequest
+    var OrigXHR = window.XMLHttpRequest;
+    window.XMLHttpRequest = function() {
+      var xhr = new OrigXHR();
+      var origOpen = xhr.open;
+      var origSend = xhr.send;
+      var url = '';
+      var method = '';
+      xhr.open = function(m, u) {
+        method = m;
+        url = u;
+        return origOpen.apply(xhr, arguments);
+      };
+      xhr.send = function() {
+        log('XHR: ' + method + ' ' + url, 'highlight');
+        xhr.addEventListener('load', function() {
+          if (xhr.status >= 400) {
+            log('XHR FAIL [' + xhr.status + ']: ' + method + ' ' + url, 'error');
+          } else {
+            log('XHR OK [' + xhr.status + ']: ' + method + ' ' + url, 'success');
+          }
+        });
+        xhr.addEventListener('error', function() {
+          log('XHR NET ERR: ' + method + ' ' + url, 'error');
+        });
+        return origSend.apply(xhr, arguments);
+      };
+      return xhr;
+    };
+    // Copy static properties
+    for (var key in OrigXHR) {
+      if (OrigXHR.hasOwnProperty(key)) {
+        window.XMLHttpRequest[key] = OrigXHR[key];
+      }
+    }
+
+    log('Debug system initialized', 'info');
+  </script>
+
+  <!-- Decap CMS -->
+  <script src="https://unpkg.com/decap-cms@^3/dist/decap-cms.js"></script>
+  <script>
+    log('Decap CMS script tag parsed', 'info');
+
+    // Check global variables
+    (function checkGlobals() {
+      var globals = [];
+      if (typeof window.CMS !== 'undefined') globals.push('window.CMS (type: ' + typeof window.CMS + ')');
+      if (typeof window.DecapCms !== 'undefined') globals.push('window.DecapCms (type: ' + typeof window.DecapCms + ')');
+      if (typeof window.netlifyIdentity !== 'undefined') globals.push('window.netlifyIdentity');
+      if (typeof window.initCMS !== 'undefined') globals.push('window.initCMS');
+      if (globals.length === 0) {
+        log('WARNING: No known CMS globals found!', 'warn');
+      } else {
+        log('Globals found: ' + globals.join(', '), 'info');
+      }
+
+      // Deep inspect CMS/DecapCms
+      var cmsObj = window.CMS || window.DecapCms;
+      if (cmsObj) {
+        var keys = Object.keys(cmsObj).slice(0, 20);
+        log('CMS keys: ' + JSON.stringify(keys), 'info');
+        // Check for init method
+        if (typeof cmsObj.init === 'function') {
+          log('CMS.init() is available', 'success');
+        }
+        if (typeof cmsObj.registerBackend === 'function') {
+          log('CMS.registerBackend() is available', 'success');
+        }
+      }
+    })();
+
+    // Watch for CMS UI to appear
+    var uiCheckCount = 0;
+    var uiCheckInterval = setInterval(function() {
+      uiCheckCount++;
+      var root = document.getElementById('nc-root');
+      if (root && root.children.length > 0) {
+        log('CMS UI loaded! nc-root has ' + root.children.length + ' children', 'success');
+        document.getElementById('loading').style.display = 'none';
+        clearInterval(uiCheckInterval);
+
+        // Check if it's login page or main UI
+        var html = root.innerHTML;
+        if (html.indexOf('Login') > -1 || html.indexOf('login') > -1 || html.indexOf('登录') > -1) {
+          log('CMS rendered LOGIN page', 'success');
+        } else if (html.indexOf('Collections') > -1 || html.indexOf('Workflow') > -1 || html.indexOf('workflow') > -1) {
+          log('CMS rendered MAIN UI (already authenticated?)', 'success');
+        } else {
+          log('CMS rendered UI (type unknown): ' + html.substring(0, 200), 'info');
+        }
+      }
+      if (uiCheckCount % 10 === 0 && uiCheckCount > 0) {
+        log('Still waiting for CMS UI... (' + (uiCheckCount * 500 / 1000) + 's)', 'warn');
+      }
+      // Force-hide loading after 15s regardless
+      if (uiCheckCount === 30) {
+        log('Force-hiding loading spinner after 15s', 'warn');
+        document.getElementById('loading').style.display = 'none';
+      }
+    }, 500);
+
+    // 30s timeout
+    setTimeout(function() {
+      var loading = document.getElementById('loading');
+      if (loading && loading.style.display !== 'none') {
+        log('TIMEOUT: CMS still loading after 30s', 'error');
+      }
+    }, 30000);
+
+    // Also check at 5s for early diagnosis
+    setTimeout(function() {
+      var root = document.getElementById('nc-root');
+      if (root && root.children.length === 0) {
+        log('5s check: nc-root still empty. Possible init failure.', 'warn');
+        // Try to manually init if possible
+        var CMS = window.CMS || window.DecapCms;
+        if (CMS && typeof CMS.init === 'function') {
+          log('Attempting manual CMS.init()...', 'highlight');
+          try {
+            CMS.init({ config: { backend: { name: 'github', repo: 'forrestxm123321/suxin-pack-website', branch: 'main', base_url: 'https://suxin-pack.pages.dev' } } });
+          } catch(e) {
+            log('Manual init error: ' + e.message, 'error');
+          }
+        }
+      }
+    }, 5000);
+
+    log('All monitors active', 'info');
+  </script>
+</body>
+</html>

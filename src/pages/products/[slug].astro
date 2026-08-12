@@ -1,0 +1,181 @@
+---
+/**
+ * 产品详情页
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import productsData from '../../data/products.json';
+
+// 模板中使用的全量产品数据
+const ALL_DATA = productsData as any;
+const ALL_PRODUCTS: any[] = ALL_DATA.items || [];
+
+export async function getStaticPaths() {
+  // Astro 5 将 getStaticPaths 提取到独立模块，无法访问组件顶层变量
+  // 必须在函数内部导入数据
+  const productsModule = await import('../../data/products.json');
+  const items = (productsModule.default || productsModule).items || [];
+  return items.map((product: any) => ({
+    params: { slug: product.id },
+    props: { product },
+  }));
+}
+
+const { product } = Astro.props;
+const pageTitle = `${product.name}_塑鑫包装`;
+const pageDescription = product.description;
+const pageKeywords = [...(product.features || []), product.name, product.categoryLabel].join(', ');
+
+// 查找同类产品
+const relatedProducts = ALL_PRODUCTS.filter(
+  (p: any) => p.category === product.category && p.id !== product.id
+).slice(0, 3);
+
+const catEmoji: Record<string, string> = {
+  'vci-rustproof': '🛡️',
+  'pe-bag': '📦',
+  'pp-bag': '📋',
+  'specialty': '⭐',
+};
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  keywords={pageKeywords}
+  canonicalURL={`/products/${product.id}/`}
+  ogType="product"
+  schemaTypes={[
+    { type: 'BreadcrumbList', data: { items: [
+      { label: '首页', href: '/' },
+      { label: '产品中心', href: '/products/' },
+      { label: product.name }
+    ]}},
+    { type: 'Product', data: product }
+  ]}
+>
+  <!-- Hero -->
+  <section class="bg-carbon-900 bg-gradient-to-br from-carbon-900 via-primary-950 to-primary-900 text-white py-12 sm:py-16 relative overflow-hidden">
+    <div class="absolute inset-0 bg-grid opacity-20"></div>
+    <div class="relative container-page">
+      <a href="/products/" class="inline-flex items-center gap-2 text-white/60 hover:text-white/90 transition-colors text-sm mb-4">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+        返回产品中心
+      </a>
+      <span class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-1.5 text-sm font-medium mb-4 border border-white/10">{catEmoji[product.category] || '📦'} {product.categoryLabel}</span>
+      <h1 class="text-3xl sm:text-4xl font-extrabold mb-3">{product.name}</h1>
+      <p class="text-lg text-white/80 max-w-3xl">{product.description}</p>
+    </div>
+  </section>
+
+  <!-- 面包屑 -->
+  <div class="bg-gray-50 border-b border-gray-100">
+    <div class="container-page py-3">
+      <nav class="breadcrumb">
+        <a href="/">首页</a>
+        <svg class="sep" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        <a href="/products/">产品中心</a>
+        <svg class="sep" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        <span class="text-gray-600 font-medium">{product.name}</span>
+      </nav>
+    </div>
+  </div>
+
+  <!-- 产品详情 -->
+  <section class="section-sm">
+    <div class="container-page">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16">
+        <!-- 产品图片 -->
+        <div class="relative aspect-[4/3] bg-gradient-to-br from-gray-100 to-gray-50 rounded-3xl overflow-hidden flex items-center justify-center">
+          {product.image ? (
+            <img
+              src={product.image}
+              alt={product.name}
+              class="w-full h-full object-cover"
+              loading="eager"
+            />
+          ) : (
+            <div class="text-8xl opacity-20 select-none">{catEmoji[product.category] || '📦'}</div>
+          )}
+        </div>
+
+        <!-- 产品信息 -->
+        <div>
+          <h2 class="text-2xl font-extrabold text-gray-900 mb-6">产品详情</h2>
+
+          <!-- 特点 -->
+          {product.features && product.features.length > 0 && (
+            <div class="mb-8">
+              <h3 class="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-3">产品特点</h3>
+              <ul class="space-y-2.5">
+                {product.features.map((f: string) => (
+                  <li class="flex items-start gap-3 text-gray-700">
+                    <svg class="w-5 h-5 text-green-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span>{f}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          <!-- 规格 -->
+          {product.specs && product.specs.length > 0 && (
+            <div class="mb-8">
+              <h3 class="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-3">规格参数</h3>
+              <ul class="space-y-2">
+                {product.specs.map((s: string) => (
+                  <li class="flex items-center gap-3 text-gray-700">
+                    <span class="w-1.5 h-1.5 bg-primary-400 rounded-full shrink-0"></span>
+                    <span>{s}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          <!-- CTA -->
+          <div class="flex flex-col sm:flex-row gap-3 pt-4">
+            <a href="/contact/" class="btn-primary text-center px-8 py-3 rounded-2xl font-bold shadow-lg">立即咨询</a>
+            <a href="/products/" class="btn-outline text-center">浏览其他产品</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 相关产品 -->
+  {relatedProducts.length > 0 && (
+    <section class="section-sm bg-gray-50/50">
+      <div class="container-page">
+        <h2 class="text-2xl font-extrabold text-gray-900 mb-8">同类产品推荐</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+          {relatedProducts.map((rp) => (
+            <a href={`/products/${rp.id}/`} class="group card-hover-lift overflow-hidden block no-underline bg-white rounded-2xl border border-gray-100">
+              <div class="relative aspect-[4/3] bg-gradient-to-br from-gray-100 to-gray-50 flex items-center justify-center overflow-hidden">
+                {rp.image ? (
+                  <img src={rp.image} alt={rp.name} class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+                ) : (
+                  <div class="text-6xl opacity-15 select-none">{catEmoji[rp.category] || '📦'}</div>
+                )}
+              </div>
+              <div class="p-4">
+                <h3 class="font-bold text-gray-900 group-hover:text-primary-700 transition-colors">{rp.name}</h3>
+                <p class="text-sm text-gray-500 mt-1 line-clamp-2">{rp.description}</p>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- CTA -->
+  <section class="section bg-gradient-to-r from-primary-600 via-primary-700 to-primary-800 text-white">
+    <div class="container-page text-center">
+      <h2 class="text-2xl sm:text-3xl font-extrabold mb-3">需要定制方案？</h2>
+      <p class="text-white/70 mb-8 max-w-lg mx-auto">告诉我们您的具体需求，我们将为您推荐最合适的包装解决方案。</p>
+      <a href="/contact/" class="btn-white !text-primary-700 text-lg px-10 py-4 rounded-2xl font-bold shadow-lg">联系我们</a>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,91 @@
+---
+/**
+ * 产品卡片 - 重设计版（含真实图片渲染 + 详情页链接）
+ */
+interface Props {
+  name: string;
+  category: string;
+  categoryLabel: string;
+  description: string;
+  features: string[];
+  image: string;
+  index?: number;
+  id?: string;
+}
+
+const { name, category, categoryLabel, description, features = [], image, index = 0, id } = Astro.props;
+const slug = id || name.replace(/[\/\\?\s]+/g, '-').toLowerCase();
+
+const catEmoji: Record<string, string> = {
+  'vci-rustproof': '🛡️',
+  'pe-bag': '📦',
+  'pp-bag': '📋',
+  'specialty': '⭐',
+};
+
+const catColor: Record<string, string> = {
+  'vci-rustproof': 'from-blue-500/10 to-blue-600/5',
+  'pe-bag': 'from-emerald-500/10 to-emerald-600/5',
+  'pp-bag': 'from-purple-500/10 to-purple-600/5',
+  'specialty': 'from-amber-500/10 to-amber-600/5',
+};
+
+// 检查是否有图片
+const hasImage = image && image.trim().length > 0;
+---
+
+<a href={`/products/${slug}/`} class="group card-hover-lift overflow-hidden block no-underline">
+  <!-- 图片区域 -->
+  <div class={`relative aspect-[4/3] bg-gradient-to-br ${catColor[category] || 'from-gray-100 to-gray-50'} flex items-center justify-center overflow-hidden`}>
+    <!-- 真实图片或装饰背景 -->
+    {hasImage ? (
+      <img
+        src={image}
+        alt={name}
+        class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+        loading="lazy"
+        onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"
+      />
+    ) : null}
+    <!-- 占位 emoji（无图片或图片加载失败时显示） -->
+    <div class={`absolute inset-0 flex items-center justify-center ${hasImage ? 'hidden' : ''}`}>
+      <div class="text-7xl opacity-15 group-hover:opacity-25 group-hover:scale-110 transition-all duration-500 select-none">
+        {catEmoji[category] || '📦'}
+      </div>
+    </div>
+    <!-- 查看详情浮层 -->
+    <div class="absolute inset-0 bg-primary-900/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 backdrop-blur-[1px] z-10">
+      <span class="bg-white text-primary-700 font-semibold px-6 py-2.5 rounded-2xl shadow-lg text-sm group-hover:scale-105 transition-transform">
+        查看详情 →
+      </span>
+    </div>
+  </div>
+
+  <!-- 内容区域 -->
+  <div class="p-5">
+    <h3 class="text-lg font-bold text-gray-900 mb-2 group-hover:text-primary-700 transition-colors">
+      {name}
+    </h3>
+    <p class="text-sm text-gray-500 leading-relaxed mb-4 line-clamp-2">{description}</p>
+
+    <!-- 特点列表 -->
+    <ul class="space-y-1.5 mb-4">
+      {features.slice(0, 3).map((f) => (
+        <li class="flex items-start gap-2 text-sm text-gray-600">
+          <svg class="w-4 h-4 text-green-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+          </svg>
+          <span>{f}</span>
+        </li>
+      ))}
+    </ul>
+
+    <!-- 底部操作 -->
+    <span class="inline-flex items-center gap-1 text-sm font-semibold text-primary-600 group-hover:text-primary-700 transition-colors">
+      了解更多
+      <svg class="w-4 h-4 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+      </svg>
+    </span>
+  </div>
+</a>

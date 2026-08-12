@@ -1,0 +1,86 @@
+---
+/**
+ * 技术文章详情 - 视觉重设计
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const articles = await getCollection('articles');
+  return articles.map((article) => ({ params: { slug: article.slug }, props: { article } }));
+}
+
+const { article } = Astro.props;
+const { Content } = await article.render();
+const { title, description, date, category, keywords } = article.data;
+const pageTitle = `${title}_技术文章`;
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={description}
+  keywords={keywords.join(', ')}
+  canonicalURL={`/blog/${article.slug}/`}
+  ogType="article"
+  schemaTypes={[
+    { type: 'BreadcrumbList', data: { items: [{ label: '首页', href: '/' }, { label: '技术文章', href: '/blog/' }, { label: title }] } },
+    { type: 'Article', data: { title, description, date, keywords } },
+  ]}
+>
+  <!-- Hero -->
+  <section class="bg-carbon-900 bg-gradient-to-br from-carbon-900 via-primary-950 to-primary-900 text-white py-16 sm:py-20 relative overflow-hidden">
+    <div class="absolute inset-0 bg-grid opacity-20"></div>
+    <div class="relative container-page">
+      <div class="max-w-3xl mx-auto">
+        <div class="flex flex-wrap items-center gap-3 mb-4">
+          <span class="badge-primary text-xs">{category}</span>
+          {date && <time datetime={date} class="text-white/50 text-sm">{date}</time>}
+        </div>
+        <h1 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold mb-4 leading-tight">{title}</h1>
+        <p class="text-white/85">{description}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 面包屑 -->
+  <div class="bg-gray-50 border-b border-gray-100">
+    <div class="container-page py-3"><nav class="breadcrumb"><a href="/">首页</a><svg class="sep" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg><a href="/blog/">技术文章</a><svg class="sep" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg><span class="text-gray-600 font-medium truncate max-w-[200px]">{title}</span></nav></div>
+  </div>
+
+  <!-- 文章内容 -->
+  <article class="section">
+    <div class="container-page">
+      <div class="max-w-3xl mx-auto">
+        <div class="prose-article">
+          <Content />
+        </div>
+
+        <!-- 关键词 -->
+        <div class="mt-12 pt-8 border-t border-gray-100">
+          <div class="flex flex-wrap gap-2">
+            {keywords.map((kw) => (<span class="badge-gray text-sm px-3 py-1">{kw}</span>))}
+          </div>
+        </div>
+
+        <div class="mt-8">
+          <a href="/blog/" class="inline-flex items-center gap-1 text-sm font-semibold text-primary-600 hover:text-primary-700 transition-colors">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+            返回文章列表
+          </a>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- CTA -->
+  <section class="section bg-gradient-to-r from-primary-600 via-primary-700 to-primary-800 text-white">
+    <div class="container-page text-center">
+      <h2 class="text-3xl font-extrabold mb-3">需要工业包装解决方案？</h2>
+      <p class="text-white/70 mb-8 max-w-xl mx-auto">联系我们获取专业选型建议和免费报价</p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/contact/" class="btn-white !text-primary-700 text-lg px-10 py-4 rounded-2xl font-bold shadow-lg">立即咨询</a>
+        <a href="/blog/" class="btn-outline-white">返回文章列表</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

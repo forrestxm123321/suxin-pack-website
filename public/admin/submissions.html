@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>询价记录 - 塑鑫包装</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:system-ui,-apple-system,sans-serif;background:#f1f5f9;color:#1e293b;min-height:100vh}
+.header{background:linear-gradient(135deg,#1e40af,#3b82f6);color:#fff;padding:20px 24px;position:sticky;top:0;z-index:10;box-shadow:0 2px 12px rgba(0,0,0,.15)}
+.header h1{font-size:20px;margin-bottom:4px}
+.header a{color:#bfdbfe;font-size:14px;text-decoration:none}
+.container{max-width:1000px;margin:0 auto;padding:24px}
+.card{background:#fff;border-radius:16px;padding:20px;margin-bottom:12px;box-shadow:0 1px 3px rgba(0,0,0,.08);border:1px solid #e2e8f0;transition:all .2s}
+.card:hover{box-shadow:0 4px 16px rgba(0,0,0,.12);border-color:#93c5fd}
+.card-header{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+.card-header .info{flex:1;min-width:0}
+.card-header .name{font-size:16px;font-weight:700;color:#1e293b;cursor:pointer}
+.card-header .name:hover{color:#2563eb}
+.card-header .time{font-size:12px;color:#94a3b8;margin-top:2px}
+.card-meta{display:flex;gap:16px;margin-top:8px;flex-wrap:wrap;font-size:13px;color:#64748b}
+.card-detail{display:none;margin-top:16px;padding-top:16px;border-top:1px solid #e2e8f0;white-space:pre-wrap;line-height:1.7;color:#475569;font-size:14px}
+.card.open .card-detail{display:block}
+.card-actions{display:flex;gap:8px;align-items:center}
+.btn-expand{background:#f1f5f9;border:none;color:#64748b;padding:6px 12px;border-radius:8px;cursor:pointer;font-size:12px;transition:all .2s}
+.btn-expand:hover{background:#e2e8f0;color:#334155}
+.btn-delete{background:#fef2f2;border:1px solid #fecaca;color:#dc2626;padding:6px 12px;border-radius:8px;cursor:pointer;font-size:12px;transition:all .2s}
+.btn-delete:hover{background:#fee2e2;border-color:#fca5a5}
+.btn-delete:disabled{opacity:.5;cursor:not-allowed}
+.loading{text-align:center;padding:60px;color:#94a3b8;font-size:16px}
+.error{text-align:center;padding:60px;color:#ef4444}
+.empty{text-align:center;padding:60px;color:#94a3b8}
+.empty .icon{font-size:48px;margin-bottom:12px}
+.refresh-btn{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.3);color:#fff;border-radius:8px;cursor:pointer;font-size:13px;transition:all .2s}
+.refresh-btn:hover{background:rgba(255,255,255,.3)}
+.toast{position:fixed;top:20px;right:20px;z-index:9999;padding:12px 20px;border-radius:10px;font-size:14px;color:#fff;animation:slideIn .3s ease;box-shadow:0 4px 12px rgba(0,0,0,.2)}
+.toast.success{background:#16a34a}
+.toast.error{background:#dc2626}
+@keyframes slideIn{from{transform:translateX(100%);opacity:0}to{transform:translateX(0);opacity:1}}
+</style>
+</head>
+<body>
+<div class="header">
+<h1>&#x1F4E8; 询价记录</h1>
+<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
+<a href="/admin/">&#x2190; 返回CMS后台</a>
+<button class="refresh-btn" onclick="loadSubmissions()">&#x1F504; 刷新</button>
+</div>
+</div>
+<div class="container" id="app">
+<div class="loading">加载中...</div>
+</div>
+<script>
+var API = '/api/submissions';
+
+function toast(msg, type) {
+  type = type || 'success';
+  var t = document.createElement('div');
+  t.className = 'toast ' + type;
+  t.textContent = msg;
+  document.body.appendChild(t);
+  setTimeout(function(){ t.remove(); }, 3000);
+}
+
+async function loadSubmissions() {
+  var app = document.getElementById('app');
+  app.innerHTML = '<div class="loading">加载中...</div>';
+
+  try {
+    var resp = await fetch(API);
+    if (!resp.ok) throw new Error('API error: ' + resp.status);
+    var submissions = await resp.json();
+
+    if (!submissions.length) {
+      app.innerHTML = '<div class="empty"><div class="icon">&#x1F4ED;</div><p>暂无询价记录</p></div>';
+      return;
+    }
+
+    app.innerHTML = submissions.map(function(s) {
+      return '<div class="card" id="card-' + s.sha + '">' +
+        '<div class="card-header">' +
+          '<div class="info">' +
+            '<div class="name" onclick="toggleCard(\'' + s.sha + '\')">' + formatDisplayName(s.name) + '</div>' +
+            '<div class="time">' + formatTime(s.name) + '</div>' +
+          '</div>' +
+          '<div class="card-actions">' +
+            '<button class="btn-expand" onclick="toggleCard(\'' + s.sha + '\')">展开</button>' +
+            '<button class="btn-delete" onclick="deleteSubmission(\'' + s.name + '\', \'' + s.sha + '\')" title="删除此记录">删除</button>' +
+          '</div>' +
+        '</div>' +
+        '<div class="card-meta" id="meta-' + s.sha + '">点击展开查看详情...</div>' +
+        '<div class="card-detail" id="detail-' + s.sha + '">加载中...</div>' +
+      '</div>';
+    }).join('');
+
+    submissions.forEach(function(s) { loadDetail(s); });
+  } catch(e) {
+    app.innerHTML = '<div class="error">加载失败: ' + e.message + '<br><br><button class="refresh-btn" onclick="loadSubmissions()" style="background:#2563eb;color:#fff;border:none;padding:8px 16px;border-radius:8px;cursor:pointer">重试</button></div>';
+  }
+}
+
+async function loadDetail(s) {
+  try {
+    var resp = await fetch(API + '?file=' + encodeURIComponent(s.name));
+    if (!resp.ok) return;
+    var data = await resp.json();
+    var metaEl = document.getElementById('meta-' + s.sha);
+    var detailEl = document.getElementById('detail-' + s.sha);
+    if (metaEl) {
+      metaEl.innerHTML =
+        '<span>&#x1F464; ' + escapeHtml(data.name || '-') + '</span>' +
+        '<span>&#x1F4F1; ' + escapeHtml(data.phone || '-') + '</span>' +
+        '<span>&#x1F3E2; ' + escapeHtml(data.company || '未填写') + '</span>' +
+        (data.email ? '<span>&#x1F4E7; ' + escapeHtml(data.email) + '</span>' : '');
+    }
+    if (detailEl) {
+      detailEl.textContent = '留言内容：\n' + (data.message || '(空)') + '\n\n提交时间：' + (data.submittedAt || '未知');
+    }
+  } catch(e) {
+    console.error('Detail load error:', e);
+  }
+}
+
+async function deleteSubmission(filename, sha) {
+  if (!confirm('确定要删除吗？此操作不可撤销。')) return;
+
+  var card = document.getElementById('card-' + sha);
+  var btn = card ? card.querySelector('.btn-delete') : null;
+  if (btn) { btn.disabled = true; btn.textContent = '删除中...'; }
+
+  try {
+    var resp = await fetch(API + '?file=' + encodeURIComponent(filename) + '&sha=' + encodeURIComponent(sha), {
+      method: 'DELETE'
+    });
+    var result = await resp.json();
+    if (resp.ok) {
+      toast('删除成功', 'success');
+      loadSubmissions();
+    } else {
+      toast('删除失败: ' + (result.error || '未知错误'), 'error');
+      if (btn) { btn.disabled = false; btn.textContent = '删除'; }
+    }
+  } catch(e) {
+    toast('网络错误: ' + e.message, 'error');
+    if (btn) { btn.disabled = false; btn.textContent = '删除'; }
+  }
+}
+
+function toggleCard(sha) {
+  var card = document.getElementById('card-' + sha);
+  if (card) card.classList.toggle('open');
+}
+
+function formatDisplayName(filename) {
+  var noExt = filename.replace('.json', '');
+  var match = noExt.match(/^(\d{4}-\d{2}-\d{2}T\d{2}-\d{2}-\d{2})_(.+)/);
+  if (match) {
+    return match[2];
+  }
+  return noExt;
+}
+
+function formatTime(filename) {
+  var match = filename.match(/^(\d{4})-(\d{2})-(\d{2})T(\d{2})-(\d{2})-(\d{2})/);
+  if (match) {
+    return match[1] + '-' + match[2] + '-' + match[3] + ' ' + match[4] + ':' + match[5] + ':' + match[6];
+  }
+  return filename;
+}
+
+function escapeHtml(str) {
+  var div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+
+loadSubmissions();
+</script>
+</body>
+</html>

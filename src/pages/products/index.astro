@@ -1,0 +1,107 @@
+---
+/**
+ * 产品中心 - 视觉重设计，含分类标签切换
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProductCard from '../../components/ProductCard.astro';
+import siteData from '../../data/site.json';
+const { KEYWORDS } = siteData;
+import productsData from '../../data/products.json';
+import categoriesData from '../../data/categories.json';
+const PRODUCTS = productsData.items;
+const PRODUCT_CATEGORIES = (categoriesData as any).categories || categoriesData;
+
+const pageTitle = '产品中心_工业塑料包装袋全系列';
+const pageDescription = '厦门塑鑫包装产品中心：VCI气相防锈袋（平口袋/方底袋/拉链袋）、PE袋、PP袋、双拉链真空袋、铝铂袋等全系列工业包装袋。源头厂家直销，支持定制尺寸、厚度和印刷。';
+const pageKeywords = ['VCI防锈袋','PE袋','PP袋','拉链袋','真空袋','铝铂袋','工业包装袋','塑料包装袋产品'].join(', ');
+
+const allCat = { id: 'all', label: '全部产品' };
+const tabs = [allCat, ...PRODUCT_CATEGORIES];
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  keywords={pageKeywords}
+  canonicalURL="/products/"
+  ogType="website"
+  schemaTypes={[{ type: 'BreadcrumbList', data: { items: [{ label: '首页', href: '/' }, { label: '产品中心' }] } }]}
+>
+  <!-- Hero -->
+  <section class="bg-carbon-900 bg-gradient-to-br from-carbon-900 via-primary-950 to-primary-900 text-white py-16 sm:py-20 relative overflow-hidden">
+    <div class="absolute inset-0 bg-grid opacity-20"></div>
+    <div class="relative container-page text-center">
+      <span class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-1.5 text-sm font-medium mb-6 border border-white/10"><span class="w-1.5 h-1.5 bg-green-400 rounded-full"></span>产品中心</span>
+      <h1 class="text-3xl sm:text-5xl font-extrabold mb-4">全系列工业包装袋</h1>
+      <p class="text-lg text-white/85 max-w-2xl mx-auto">源头生产，从VCI防锈袋到通用PE/PP袋，一站式满足您的工业包装需求</p>
+    </div>
+  </section>
+
+  <!-- 面包屑 -->
+  <div class="bg-gray-50 border-b border-gray-100">
+    <div class="container-page py-3">
+      <nav class="breadcrumb">
+        <a href="/">首页</a>
+        <svg class="sep" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        <span class="text-gray-600 font-medium">产品中心</span>
+      </nav>
+    </div>
+  </div>
+
+  <!-- 产品列表 -->
+  <section class="section-sm bg-gray-50/30">
+    <div class="container-page">
+      {PRODUCT_CATEGORIES.map((cat) => {
+        const catProducts = PRODUCTS.filter((p) => p.category === cat.id);
+        return (
+          <div id={cat.id} class="mb-16 last:mb-0 scroll-mt-24">
+            <!-- 分类标题 -->
+            <div class="flex items-center justify-between mb-8 pb-4 border-b-2 border-gray-100">
+              <div class="flex items-center gap-4">
+                <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center text-2xl shadow-sm">{
+                  cat.id === 'vci-rustproof' ? '🛡️' :
+                  cat.id === 'pe-bag' ? '📦' :
+                  cat.id === 'pp-bag' ? '📋' : '⭐'
+                }</div>
+                <div>
+                  <h2 class="text-2xl font-extrabold text-gray-900">{cat.label}</h2>
+                  <p class="text-sm text-gray-500 mt-0.5">{catProducts.length} 款产品</p>
+                </div>
+              </div>
+              <a href={`#${cat.id}`} class="hidden sm:inline-flex items-center gap-1 text-sm font-semibold text-primary-600 hover:text-primary-700 transition-colors shrink-0">
+                查看全系列 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+              </a>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+              {catProducts.map((product, i) => (
+                <ProductCard
+                  name={product.name}
+                  id={product.id}
+                  category={product.category}
+                  categoryLabel={product.categoryLabel}
+                  description={product.description}
+                  features={product.features}
+                  image={product.image}
+                  index={i}
+                />
+              ))}
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section bg-gradient-to-r from-primary-600 via-primary-700 to-primary-800 text-white">
+    <div class="container-page text-center">
+      <h2 class="text-2xl sm:text-3xl font-extrabold mb-3">没有找到合适的产品？</h2>
+      <p class="text-white/70 mb-8 max-w-lg mx-auto">我们支持全定制生产。告知您的需求，我们为您量身推荐最合适的方案。</p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/contact/" class="btn-white !text-primary-700 text-lg px-10 py-4 rounded-2xl font-bold shadow-lg">联系定制</a>
+        <a href="/cases/" class="btn-outline-white">参考案例</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

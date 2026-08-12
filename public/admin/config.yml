@@ -1,0 +1,162 @@
+backend:
+  name: github
+  repo: forrestxm123321/suxin-pack-website
+  branch: main
+  base_url: https://suxin-pack.pages.dev
+  auth_endpoint: auth
+  site_domain: suxin-pack.pages.dev
+
+# 媒体文件上传目录
+media_folder: "public/images/uploads"
+public_folder: "/images/uploads"
+
+# 中文界面
+locale: "zh_Hans"
+
+# 网站 URL（用于预览）
+site_url: https://suxin-pack.pages.dev
+display_url: https://suxin-pack.pages.dev
+
+# 集合定义
+collections:
+  # ========== 网站设置（单文件） ==========
+  - name: "settings"
+    label: "⚙️ 网站设置"
+    extension: json
+    format: json
+    editor:
+      preview: false
+    files:
+      - name: "site"
+        label: "站点基本信息"
+        file: "src/data/site.json"
+        fields:
+          - name: "SITE"
+            label: "公司信息"
+            widget: "object"
+            fields:
+              - { label: "公司全称", name: "name", widget: "string" }
+              - { label: "公司简称", name: "shortName", widget: "string" }
+              - { label: "标语", name: "tagline", widget: "string" }
+              - { label: "网站描述", name: "description", widget: "text" }
+              - { label: "网站URL", name: "url", widget: "string" }
+              - { label: "公开邮箱", name: "email", widget: "string" }
+              - { label: "询价通知邮箱", name: "notificationEmail", widget: "string", hint: "客户提交表单后，通知邮件发到这个地址", required: false }
+              - { label: "公司简介", name: "companyIntro", widget: "text", hint: '显示在关于我们页面，支持换行' }
+              - { label: "电话", name: "phone", widget: "string" }
+              - { label: "地址", name: "address", widget: "string" }
+              - { label: "ICP备案号", name: "icp", widget: "string", required: false }
+              - { label: "公司Logo", name: "logo", widget: "image", hint: "上传公司Logo，建议正方形PNG，尺寸 200x200 以上", required: false }
+              - { label: "SGS证书", name: "sgsCertificate", widget: "file", hint: "上传SGS检测证书，支持 PDF / JPG / PNG", required: false }
+          - name: "certificates"
+            label: "资质证书列表"
+            widget: "list"
+            fields:
+              - { label: "证书名称", name: "name", widget: "string" }
+              - { label: "证书文件", name: "image", widget: "file", hint: "上传证书文件，支持 PDF / JPG / PNG" }
+              - { label: "证书描述", name: "desc", widget: "text" }
+          - name: "ADVANTAGES"
+            label: "核心优势"
+            widget: "list"
+            fields:
+              - { label: "图标代码", name: "icon", widget: "string" }
+              - { label: "标题", name: "title", widget: "string" }
+              - { label: "描述", name: "description", widget: "text" }
+          - name: "COMPANY_STATS"
+            label: "公司数据"
+            widget: "list"
+            fields:
+              - { label: "数值", name: "value", widget: "string" }
+              - { label: "标签", name: "label", widget: "string" }
+          - name: "INDUSTRIES"
+            label: "服务行业"
+            widget: "list"
+            fields:
+              - { label: "行业名称", name: "name", widget: "string" }
+              - { label: "图标代码", name: "icon", widget: "string" }
+              - { label: "描述", name: "desc", widget: "text" }
+          - name: "KEYWORDS"
+            label: "SEO关键词"
+            widget: "list"
+            field: { label: "关键词", name: "keyword", widget: "string" }
+      - name: "categories"
+        label: "产品分类"
+        file: "src/data/categories.json"
+        fields:
+          - name: "categories"
+            label: "分类列表"
+            widget: "list"
+            fields:
+              - { label: "分类ID", name: "id", widget: "string", hint: "英文，如 vci-rustproof" }
+              - { label: "分类名称", name: "label", widget: "string", hint: "如 VCI防锈袋系列" }
+              - { label: "图标代码", name: "icon", widget: "select", options: ["shield","package","layers","star","truck","wrench","flask","zap","box","tag"], hint: "前端展示用图标" }
+
+  # ========== 产品管理（单文件数组） ==========
+  - name: "products"
+    label: "📦 产品管理"
+    extension: json
+    format: json
+    editor:
+      preview: false
+    files:
+      - name: "products"
+        label: "产品列表"
+        file: "src/data/products.json"
+        fields:
+          - name: "items"
+            label: "产品"
+            widget: "list"
+            fields:
+              - { label: "产品ID", name: "id", widget: "string", hint: "唯一标识，如 vci-flat-bag" }
+              - { label: "产品名称", name: "name", widget: "string" }
+              - { label: "所属分类ID", name: "category", widget: "select", options: ["vci-rustproof", "pe-bag", "pp-bag", "specialty"] }
+              - { label: "所属分类标签", name: "categoryLabel", widget: "select", options: ["VCI防锈袋系列", "PE塑料袋系列", "PP塑料袋系列", "特种功能袋系列"] }
+              - { label: "产品描述", name: "description", widget: "text" }
+              - { label: "产品特点", name: "features", widget: "list", field: { label: "特点", name: "feature", widget: "string" } }
+              - { label: "规格参数", name: "specs", widget: "list", field: { label: "规格", name: "spec", widget: "string" } }
+              - { label: "产品图片路径", name: "image", widget: "image", hint: "如 /images/vci-flat.jpg 或在CMS中上传" }
+
+  # ========== 案例管理（单文件数组） ==========
+  - name: "cases"
+    label: "🏆 客户案例"
+    extension: json
+    format: json
+    editor:
+      preview: false
+    files:
+      - name: "cases"
+        label: "案例列表"
+        file: "src/data/cases.json"
+        fields:
+          - name: "items"
+            label: "案例"
+            widget: "list"
+            fields:
+              - { label: "案例ID", name: "id", widget: "string" }
+              - { label: "案例标题", name: "title", widget: "string" }
+              - { label: "所属行业", name: "industry", widget: "string" }
+              - { label: "行业图标", name: "industryIcon", widget: "string", hint: "emoji 表情，如 🚗" }
+              - { label: "客户名称", name: "client", widget: "string" }
+              - { label: "客户挑战", name: "challenge", widget: "text" }
+              - { label: "解决方案", name: "solution", widget: "text" }
+              - { label: "实施效果", name: "result", widget: "text" }
+              - { label: "使用产品", name: "products", widget: "list", field: { label: "产品名", name: "product", widget: "string" } }
+              - { label: "标签", name: "tags", widget: "list", field: { label: "标签", name: "tag", widget: "string" } }
+
+  # ========== 技术文章（文件夹集合，每篇一个MD文件） ==========
+  - name: "articles"
+    label: "📝 技术文章"
+    folder: "src/content/articles"
+    create: true
+    slug: "{{slug}}"
+    extension: md
+    format: frontmatter
+    editor:
+      preview: true
+    fields:
+      - { label: "标题", name: "title", widget: "string" }
+      - { label: "文章描述", name: "description", widget: "string" }
+      - { label: "发布日期", name: "date", widget: "date", required: false, hint: "点击日期选择器默认选中今天，留空则不显示日期" }
+      - { label: "文章分类", name: "category", widget: "select", options: ["VCI防锈技术", "防锈包装", "材质选型"] }
+      - { label: "关键词", name: "keywords", widget: "list", field: { label: "关键词", name: "keyword", widget: "string" } }
+      - { label: "正文", name: "body", widget: "markdown" }

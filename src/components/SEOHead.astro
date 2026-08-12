@@ -1,0 +1,67 @@
+---
+/**
+ * SEO Head 组件 - 统一管理 TDK 标签和 Open Graph
+ * 百度 SEO 核心：每个页面独立的 Title / Description / Keywords
+ */
+import siteData from '../data/site.json';
+const { SITE } = siteData;
+
+interface Props {
+  title: string;
+  description: string;
+  keywords?: string;
+  canonicalURL?: string;
+  ogImage?: string;
+  ogType?: 'website' | 'article' | 'product';
+  noindex?: boolean;
+}
+
+const {
+  title,
+  description,
+  keywords = '',
+  canonicalURL,
+  ogImage = '/images/og-default.jpg',
+  ogType = 'website',
+  noindex = false,
+} = Astro.props;
+
+const fullTitle = title.includes(SITE.shortName) ? title : `${title} - ${SITE.shortName}`;
+const canonical = canonicalURL ? `${SITE.url}${canonicalURL}` : undefined;
+---
+
+<!-- 百度 SEO 核心 TDK 标签 -->
+<title>{fullTitle}</title>
+<meta name="description" content={description} />
+{keywords && <meta name="keywords" content={keywords} />}
+
+<!-- 百度验证标签（申请百度站长平台后填入） -->
+<meta name="baidu-site-verification" content="" />
+
+<!-- Canonical URL -->
+{canonical && <link rel="canonical" href={canonical} />}
+
+<!-- 索引控制 -->
+{noindex ? (
+  <meta name="robots" content="noindex, follow" />
+) : (
+  <meta name="robots" content="index, follow" />
+)}
+
+<!-- Open Graph (社交分享) -->
+<meta property="og:title" content={fullTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:type" content={ogType} />
+<meta property="og:url" content={canonical || SITE.url} />
+<meta property="og:site_name" content={SITE.name} />
+<meta property="og:locale" content="zh_CN" />
+<meta property="og:image" content={`${SITE.url}${ogImage}`} />
+
+<!-- 移动端适配（百度移动优先） -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="format-detection" content="telephone=yes" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<!-- 字符集 -->
+<meta charset="utf-8" />

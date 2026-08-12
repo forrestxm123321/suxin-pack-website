@@ -1,0 +1,137 @@
+---
+/**
+ * 客户案例页 - 视觉重设计
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import casesData from '../../data/cases.json';
+const CASES = casesData.items;
+
+const pageTitle = '客户案例_工业包装解决方案应用实绩';
+const pageDescription = '厦门塑鑫包装客户案例：汽车零部件出口防锈、新能源电池防潮、五金工具包装优化、精密模具封存等行业的VCI防锈袋和工业包装袋应用实绩。源头厂家，值得信赖。';
+const pageKeywords = '防锈袋案例,VCI防锈包装案例,工业包装袋应用,汽车零部件防锈方案,新能源防锈包装案例';
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  keywords={pageKeywords}
+  canonicalURL="/cases/"
+  ogType="website"
+  schemaTypes={[{ type: 'BreadcrumbList', data: { items: [{ label: '首页', href: '/' }, { label: '客户案例' }] } }]}
+>
+  <!-- Hero -->
+  <section class="bg-carbon-900 bg-gradient-to-br from-carbon-900 via-primary-950 to-primary-900 text-white py-16 sm:py-20 relative overflow-hidden">
+    <div class="absolute inset-0 bg-grid opacity-20"></div>
+    <div class="relative container-page text-center">
+      <span class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-1.5 text-sm font-medium mb-6 border border-white/10"><span class="w-1.5 h-1.5 bg-green-400 rounded-full"></span>客户案例</span>
+      <h1 class="text-3xl sm:text-5xl font-extrabold mb-4">行业头部企业的共同选择</h1>
+      <p class="text-lg text-white/85 max-w-2xl mx-auto">每一个案例都是专业能力的见证。覆盖六大行业，为客户解决实际包装难题。</p>
+    </div>
+  </section>
+
+  <!-- 面包屑 -->
+  <div class="bg-gray-50 border-b border-gray-100">
+    <div class="container-page py-3">
+      <nav class="breadcrumb">
+        <a href="/">首页</a><svg class="sep" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        <span class="text-gray-600 font-medium">客户案例</span>
+      </nav>
+    </div>
+  </div>
+
+  <!-- 统计摘要 -->
+  <section class="section-sm bg-gray-50/30">
+    <div class="container-page">
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+        {[
+          { icon: 'M3 21h18M9 21V9m6-4v16M3 9l4-4h10l4 4', label: '服务行业' },
+          { icon: 'M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75', label: '服务客户' },
+          { icon: 'M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z', label: '满意度' },
+          { icon: 'M12 2a7 7 0 017 7c0 5.25-7 13-7 13S5 14.25 5 9a7 7 0 017-7zM12 6a3 3 0 100 6 3 3 0 000-6z', label: '出口国家' },
+        ].map(({ icon, label }, i) => {
+          const nums = ['6+', '1000+', '99.8%', '30+'];
+          return (
+          <div class="bg-white rounded-2xl p-6 text-center border border-gray-100 shadow-[0_2px_12px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)] hover:-translate-y-0.5 transition-all duration-300">
+            <div class="w-12 h-12 mx-auto mb-3 bg-primary-50 rounded-2xl flex items-center justify-center">
+              <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d={icon}/></svg>
+            </div>
+            <div class="text-3xl font-extrabold text-gradient">{nums[i]}</div>
+            <div class="text-xs text-gray-500 mt-1 font-medium">{label}</div>
+          </div>
+        )})}
+      </div>
+    </div>
+  </section>
+
+  <!-- 案例列表 -->
+  <section class="section-sm">
+    <div class="container-page">
+      <div class="space-y-6 sm:space-y-8">
+        {CASES.map((c) => (
+          <article id={c.id} class="card overflow-hidden scroll-mt-24">
+            <!-- 头部 -->
+            <div class="bg-gradient-to-r from-gray-50 to-white px-6 sm:px-8 py-5 border-b border-gray-50 flex flex-wrap items-center justify-between gap-3">
+              <div class="flex items-center gap-3">
+                <div class="w-12 h-12 rounded-2xl bg-white flex items-center justify-center text-2xl shadow-sm border border-gray-100">{c.industryIcon}</div>
+                <div>
+                  <span class="badge-primary text-xs mb-1">{c.industry}</span>
+                  <h2 class="text-xl font-extrabold text-gray-900">{c.title}</h2>
+                </div>
+              </div>
+              <span class="text-xs text-gray-400 bg-white px-3 py-1.5 rounded-full border border-gray-100">{c.client}</span>
+            </div>
+
+            <!-- 三栏内容 -->
+            <div class="p-6 sm:p-8 grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
+              <div class="lg:border-r lg:border-gray-50 lg:pr-6">
+                <div class="flex items-center gap-2 mb-3">
+                  <div class="w-8 h-8 bg-red-50 text-red-500 rounded-lg flex items-center justify-center text-sm font-bold">!</div>
+                  <h3 class="font-bold text-gray-900">客户挑战</h3>
+                </div>
+                <p class="text-sm text-gray-600 leading-relaxed">{c.challenge}</p>
+              </div>
+              <div class="lg:border-r lg:border-gray-50 lg:pr-6">
+                <div class="flex items-center gap-2 mb-3">
+                  <div class="w-8 h-8 bg-primary-50 text-primary-600 rounded-lg flex items-center justify-center text-sm font-bold">✓</div>
+                  <h3 class="font-bold text-gray-900">解决方案</h3>
+                </div>
+                <p class="text-sm text-gray-600 leading-relaxed">{c.solution}</p>
+              </div>
+              <div>
+                <div class="flex items-center gap-2 mb-3">
+                  <div class="w-8 h-8 bg-green-50 text-green-600 rounded-lg flex items-center justify-center text-sm font-bold">↑</div>
+                  <h3 class="font-bold text-gray-900">实施效果</h3>
+                </div>
+                <p class="text-sm text-gray-600 leading-relaxed">{c.result}</p>
+              </div>
+            </div>
+
+            <!-- 标签 -->
+            <div class="px-6 sm:px-8 py-4 bg-gray-50/50 border-t border-gray-50 flex flex-wrap items-center gap-2">
+              <span class="text-xs text-gray-400 font-medium">相关产品：</span>
+              {c.products.map((p) => (
+                <span class="badge-primary text-xs">{p}</span>
+              ))}
+              <span class="w-px h-4 bg-gray-200 mx-1"></span>
+              {c.tags.map((t) => (
+                <span class="badge-gray text-xs">{t}</span>
+              ))}
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section bg-gradient-to-r from-primary-600 via-primary-700 to-primary-800 text-white">
+    <div class="container-page text-center">
+      <h2 class="text-3xl font-extrabold mb-3">让您的包装难题成为下一个成功案例</h2>
+      <p class="text-white/70 mb-8 max-w-xl mx-auto">无论是出口防锈、长期封存还是成本优化，我们的工程师团队为您量身定制解决方案。</p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/contact/" class="btn-white !text-primary-700 text-lg px-10 py-4 rounded-2xl font-bold shadow-lg">免费咨询方案</a>
+        <a href="/products/" class="btn-outline-white">浏览产品中心</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

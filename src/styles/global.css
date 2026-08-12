@@ -1,0 +1,272 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ====== 设计令牌 ======
+   工业科技风: 深蓝 + 碳灰 + 翠绿点缀
+   适用于塑料包装行业B2B网站
+*/
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply text-gray-700 bg-white;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+      "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+  }
+
+  /* 自定义选择颜色 */
+  ::selection {
+    @apply bg-primary-100 text-primary-900;
+  }
+}
+
+/* ====== 组件类 ====== */
+@layer components {
+  /* 页面容器 */
+  .container-page {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  /* 区块间距 */
+  .section {
+    @apply py-16 sm:py-20 lg:py-24;
+  }
+
+  .section-sm {
+    @apply py-12 sm:py-16;
+  }
+
+  /* 区块标题系统 */
+  .section-badge {
+    @apply inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-semibold mb-4;
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.08), rgba(37, 99, 235, 0.03));
+    color: #2563eb;
+    border: 1px solid rgba(37, 99, 235, 0.12);
+  }
+
+  .section-badge-green {
+    @apply inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-semibold mb-4;
+    background: linear-gradient(135deg, rgba(22, 163, 74, 0.08), rgba(22, 163, 74, 0.03));
+    color: #16a34a;
+    border: 1px solid rgba(22, 163, 74, 0.12);
+  }
+
+  .section-title {
+    @apply text-2xl sm:text-3xl lg:text-4xl font-extrabold text-gray-900 text-center mb-4 tracking-tight;
+  }
+
+  .section-subtitle {
+    @apply text-gray-500 text-center max-w-2xl mx-auto mb-12 text-base sm:text-lg leading-relaxed;
+  }
+
+  /* 按钮系统 */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-semibold
+           bg-primary-600 text-white
+           hover:bg-primary-700 hover:shadow-lg hover:shadow-primary-600/20
+           active:scale-[0.98]
+           transition-all duration-200;
+  }
+
+  .btn-primary-lg {
+    @apply btn-primary px-10 py-4 text-lg rounded-2xl;
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-semibold
+           border-2 border-gray-300 text-gray-700
+           hover:border-primary-300 hover:text-primary-600 hover:bg-primary-50/50
+           active:scale-[0.98]
+           transition-all duration-200;
+  }
+
+  .btn-outline-lg {
+    @apply btn-outline px-10 py-4 text-lg rounded-2xl;
+  }
+
+  .btn-white {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-semibold
+           bg-white text-primary-700
+           hover:bg-gray-50 hover:shadow-lg
+           active:scale-[0.98]
+           transition-all duration-200;
+  }
+
+  .btn-accent {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-semibold
+           bg-accent-500 text-white
+           hover:bg-accent-600 hover:shadow-lg hover:shadow-accent-500/20
+           active:scale-[0.98]
+           transition-all duration-200;
+  }
+
+  .btn-outline-white {
+    @apply inline-flex items-center gap-2 border-2 border-white/30 text-white
+           hover:bg-white hover:text-primary-700 rounded-2xl px-10 py-4
+           font-bold text-lg transition-all duration-300;
+  }
+
+  .btn-primary-sm {
+    @apply btn-primary text-sm py-2.5 px-5;
+  }
+
+  /* 卡片系统 */
+  .card {
+    @apply bg-white rounded-2xl border border-gray-100 transition-all duration-300;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.04);
+  }
+  .card:hover {
+    box-shadow: 0 4px 6px rgba(0,0,0,0.06), 0 10px 24px rgba(0,0,0,0.08);
+    @apply border-gray-200;
+  }
+
+  .card-hover-lift {
+    @apply card;
+  }
+  .card-hover-lift:hover {
+    @apply -translate-y-1;
+    box-shadow: 0 8px 12px rgba(0,0,0,0.06), 0 16px 32px rgba(0,0,0,0.10);
+  }
+
+  /* 玻璃效果 */
+  .glass {
+    @apply bg-white/80 backdrop-blur-md border border-white/20 shadow-sm;
+  }
+
+  /* 渐变背景（工业科技风） */
+  .gradient-hero {
+    background-color: #0f172a;
+    background-image: linear-gradient(135deg, #0f1d3a 0%, #13294b 30%, #1a3a6b 60%, #1d4ed8 100%);
+  }
+
+  .gradient-section {
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 30%, #e2e8f0 100%);
+  }
+
+  /* 输入框统一 */
+  .input-field {
+    @apply w-full px-4 py-3 border border-gray-200 rounded-xl text-sm
+           placeholder:text-gray-400
+           focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500
+           outline-none transition-all duration-200;
+  }
+  .input-field:focus {
+    box-shadow: 0 0 0 3px rgba(37,99,235,0.12), inset 0 1px 2px rgba(0,0,0,0.02);
+    border-color: #3b82f6;
+  }
+
+  /* 标签/徽章 */
+  .badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+  }
+
+  .badge-primary {
+    @apply badge bg-primary-50 text-primary-700 border border-primary-100;
+  }
+
+  .badge-green {
+    @apply badge bg-green-50 text-green-700 border border-green-100;
+  }
+
+  .badge-gray {
+    @apply badge bg-gray-100 text-gray-600 border border-gray-200;
+  }
+
+  /* 面包屑 */
+  .breadcrumb {
+    @apply flex items-center gap-2 text-sm text-gray-500;
+  }
+
+  .breadcrumb a {
+    @apply hover:text-primary-600 transition-colors;
+  }
+
+  .breadcrumb .sep {
+    @apply w-4 h-4 text-gray-400;
+  }
+
+  /* 文章排版 */
+  .prose-article {
+    @apply text-gray-700 leading-relaxed;
+  }
+  .prose-article h2 {
+    @apply text-2xl font-bold text-gray-900 mt-12 mb-5 pb-3 border-b-2 border-gray-100;
+  }
+  .prose-article h3 {
+    @apply text-xl font-semibold text-gray-900 mt-8 mb-4;
+  }
+  .prose-article p {
+    @apply mb-5 leading-loose;
+  }
+  .prose-article strong {
+    @apply text-gray-900;
+  }
+  .prose-article ul, .prose-article ol {
+    @apply my-4 pl-6 space-y-2;
+  }
+  .prose-article ul li {
+    @apply list-disc text-gray-600 leading-relaxed;
+  }
+  .prose-article ol li {
+    @apply list-decimal text-gray-600 leading-relaxed;
+  }
+  .prose-article table {
+    @apply w-full border-collapse my-6 rounded-xl overflow-hidden border border-gray-200;
+  }
+  .prose-article th {
+    @apply bg-gray-50 px-5 py-3 text-left text-sm font-semibold text-gray-700 border-b border-gray-200;
+  }
+  .prose-article td {
+    @apply px-5 py-3 text-sm text-gray-600 border-b border-gray-100;
+  }
+  .prose-article tr:last-child td {
+    @apply border-b-0;
+  }
+  .prose-article a {
+    @apply text-primary-600 font-medium hover:text-primary-700 underline decoration-primary-200 underline-offset-2;
+  }
+
+  /* 渐入动画 */
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .animate-fade-in-up {
+    animation: fadeInUp 0.6s ease-out both;
+  }
+}
+
+/* ====== 工具类 ====== */
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* 渐变文字 */
+  .text-gradient {
+    background: linear-gradient(135deg, #2563eb, #1e40af);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* 工业图案背景 */
+  .bg-grid {
+    background-image:
+      linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  /* 点阵背景 */
+  .bg-dots {
+    background-image: radial-gradient(rgba(255,255,255,0.1) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+}

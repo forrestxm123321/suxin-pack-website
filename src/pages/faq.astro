@@ -1,0 +1,168 @@
+---
+/**
+ * 常见问题 FAQ 页面
+ * 10个FAQ覆盖核心长尾关键词，含完整 Schema.org FAQPage + BreadcrumbList
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import siteData from '../data/site.json';
+const { SITE } = siteData;
+
+const pageTitle = 'VCI气相防锈袋常见问题 FAQ - ' + SITE.shortName;
+const pageDescription = 'VCI防锈袋原理是什么？防锈袋能管多久？汽配五金防锈包装怎么选？防锈平口袋和方底袋有什么区别？出口包装有什么要求？' + SITE.shortName + '为您专业解答。';
+const pageKeywords = 'VCI防锈袋FAQ,防锈袋常见问题,防锈包装咨询,' + SITE.shortName + ',VCI防锈原理,防锈袋定制,出口防锈包装';
+
+const faqQuestions = SITE.faqQuestions || [];
+
+const categories = [
+  { id: 'all', label: '全部问题' },
+  { id: 'product', label: '产品相关' },
+  { id: 'order', label: '定制/交期' },
+  { id: 'export', label: '出口/合规' },
+  { id: 'region', label: '地域/服务' },
+];
+
+// Map questions to categories
+const faqWithCat = faqQuestions.map((q, i) => {
+  const t = q.question + q.answer;
+  let cat = 'product';
+  if (t.includes('起订') || t.includes('打样') || t.includes('交期') || t.includes('急单') || t.includes('定制')) cat = 'order';
+  else if (t.includes('出口') || t.includes('环保') || t.includes('检测报告') || t.includes('REACH') || t.includes('RoHS')) cat = 'export';
+  else if (t.includes('厦门') || t.includes('漳州') || t.includes('泉州') || t.includes('工厂在哪') || t.includes('哪里能买到')) cat = 'region';
+  return { ...q, cat, index: i + 1 };
+});
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  keywords={pageKeywords}
+  canonicalURL="/faq/"
+  ogType="website"
+  schemaTypes={[
+    { type: 'FAQPage', data: { questions: faqQuestions } },
+    { type: 'BreadcrumbList', data: { items: [
+      { label: '首页', href: '/' },
+      { label: '常见问题', href: '/faq/' },
+    ]}},
+    { type: 'WebSite', data: {} },
+  ]}
+>
+  <!-- Header -->
+  <section class="relative overflow-hidden bg-gradient-to-br from-primary-700 via-primary-600 to-blue-700 text-white">
+    <div class="absolute inset-0 bg-grid opacity-20"></div>
+    <div class="absolute -top-40 -right-40 w-80 h-80 bg-white/5 rounded-full"></div>
+    <div class="relative container-page py-16 sm:py-20 text-center">
+      <h1 class="text-3xl sm:text-4xl font-extrabold mb-3">❓ VCI气相防锈袋 · 常见问题</h1>
+      <p class="text-lg text-white/90 mb-2">{SITE.shortName} — 源头生产厂家 · 专业解答</p>
+      <p class="text-sm text-white/70">
+        📞 立即咨询：<a href="tel:{SITE.phone}" class="text-yellow-300 font-bold hover:underline">{SITE.phone}</a>
+        {SITE.phone2 && (<> / <a href="tel:{SITE.phone2}" class="text-yellow-300 font-bold hover:underline">{SITE.phone2}</a></>)}
+        &nbsp;|&nbsp; 📧 <a href="mailto:{SITE.email}" class="text-yellow-300 hover:underline">{SITE.email}</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- Breadcrumb -->
+  <div class="container-page py-4">
+    <nav class="text-sm text-gray-500" aria-label="面包屑导航">
+      🏠 <a href="/" class="text-primary-600 hover:underline">首页</a> › <span class="text-gray-900 font-medium">常见问题</span>
+    </nav>
+  </div>
+
+  <!-- Category filter -->
+  <div class="container-page pb-6">
+    <div class="flex flex-wrap gap-2" id="faq-categories">
+      {categories.map((cat) => (
+        <button
+          type="button"
+          class={`faq-cat-btn px-4 py-2 rounded-xl text-sm font-medium border transition-all duration-200 cursor-pointer ${
+            cat.id === 'all'
+              ? 'bg-primary-600 text-white border-primary-600 shadow-sm'
+              : 'bg-white text-gray-600 border-gray-200 hover:border-primary-300 hover:text-primary-600'
+          }`}
+          data-cat={cat.id}
+        >
+          {cat.label}
+        </button>
+      ))}
+    </div>
+  </div>
+
+  <!-- FAQ List -->
+  <div class="container-page pb-12">
+    <div class="max-w-3xl mx-auto space-y-3" id="faq-list">
+      {faqWithCat.map((faq) => (
+        <details class="faq-item group bg-white rounded-2xl border border-gray-100 shadow-card overflow-hidden" data-cat={faq.cat} open={faq.index <= 4}>
+          <summary class="flex items-center justify-between p-5 sm:p-6 cursor-pointer hover:bg-gray-50/50 transition-colors list-none">
+            <div class="flex items-center gap-3">
+              <span class="shrink-0 w-8 h-8 bg-gradient-to-br from-primary-500 to-primary-600 text-white rounded-lg flex items-center justify-center text-sm font-bold">Q{faq.index}</span>
+              <span class="font-semibold text-gray-900 pr-4">{faq.question}</span>
+            </div>
+            <span class="shrink-0 w-8 h-8 rounded-xl bg-gray-100 flex items-center justify-center group-open:bg-primary-100 group-open:text-primary-700 transition-all duration-200 ml-auto">
+              <svg class="w-4 h-4 group-open:rotate-45 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/>
+              </svg>
+            </span>
+          </summary>
+          <div class="px-5 sm:px-6 pb-5 sm:pb-6 pl-16 sm:pl-[68px]">
+            <div class="bg-primary-50/50 rounded-xl p-4 text-sm text-gray-600 leading-relaxed border border-primary-100/50">
+              {faq.answer}
+            </div>
+          </div>
+        </details>
+      ))}
+    </div>
+
+    <!-- No result -->
+    <div id="faq-no-result" class="hidden text-center text-gray-400 py-12">
+      没有匹配的问题，请尝试其他分类或<a href="/contact/" class="text-primary-600 hover:underline">直接联系我们</a>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <section class="container-page pb-16">
+    <div class="relative bg-gradient-to-r from-primary-600 via-primary-700 to-primary-800 rounded-3xl p-10 sm:p-16 text-center text-white shadow-elevated overflow-hidden max-w-3xl mx-auto">
+      <div class="absolute top-0 right-0 w-80 h-80 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+      <div class="relative">
+        <h2 class="text-2xl sm:text-3xl font-extrabold mb-4">🤔 没找到您想要的答案？</h2>
+        <p class="text-white/70 mb-8 max-w-xl mx-auto">直接联系我们，专业团队24小时内为您解答。源头工厂，价格实在，欢迎验厂！</p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <a href="/contact/" class="btn-white !text-primary-700 text-lg px-10 py-4 rounded-2xl font-bold">
+            📞 立即咨询获取报价
+          </a>
+          <a href="/products/" class="btn-outline-white">
+            查看产品
+          </a>
+        </div>
+        <p class="text-white/40 text-sm mt-6">电话：{SITE.phone}{SITE.phone2 && (' / ' + SITE.phone2)} ｜ 邮箱：{SITE.email}<br/>地址：{SITE.address}</p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<!-- Category filter script -->
+<script>
+  document.querySelectorAll('.faq-cat-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.faq-cat-btn').forEach(b => {
+        b.classList.remove('bg-primary-600', 'text-white', 'border-primary-600', 'shadow-sm');
+        b.classList.add('bg-white', 'text-gray-600', 'border-gray-200');
+      });
+      btn.classList.add('bg-primary-600', 'text-white', 'border-primary-600', 'shadow-sm');
+      btn.classList.remove('bg-white', 'text-gray-600', 'border-gray-200');
+
+      const cat = btn.dataset.cat;
+      let visibleCount = 0;
+      document.querySelectorAll('.faq-item').forEach(item => {
+        if (cat === 'all' || item.dataset.cat === cat) {
+          item.style.display = '';
+          visibleCount++;
+        } else {
+          item.style.display = 'none';
+        }
+      });
+      const noResult = document.getElementById('faq-no-result');
+      if (noResult) noResult.classList.toggle('hidden', visibleCount > 0);
+    });
+  });
+</script>

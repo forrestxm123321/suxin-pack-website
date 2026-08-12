@@ -1,0 +1,51 @@
+name: 自动压缩图片
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'public/images/uploads/**'
+
+jobs:
+  optimize:
+    # 跳过自动提交，防止无限循环
+    if: "!contains(github.event.head_commit.message, '[auto-optimize]')"
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 安装图片压缩工具
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq imagemagick
+
+      - name: 压缩 JPEG/PNG 图片
+        run: |
+          echo "## 📸 图片压缩报告" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          find public/images/uploads -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" \) | while read img; do
+            original_size=$(stat -c%s "$img")
+            magick "$img" -resize "1200x1200>" -quality 85 -strip -interlace Plane "$img"
+            new_size=$(stat -c%s "$img")
+            reduction=$((100 - new_size * 100 / original_size))
+            echo "  $(basename $img): ${original_size}B → ${new_size}B (-${reduction}%)"
+            echo "| $(basename "$img") | ${original_size}B | ${new_size}B | ${reduction}% |" >> $GITHUB_STEP_SUMMARY
+          done
+
+      - name: 提交优化后的图片
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add public/images/uploads/
+          if git diff --staged --quiet; then
+            echo "没有需要压缩的图片"
+          else
+            git commit -m "📸 自动压缩图片 [auto-optimize]"
+            git push
+            echo "图片已压缩并推送，Cloudflare Pages 将自动部署优化版本"
+          fi

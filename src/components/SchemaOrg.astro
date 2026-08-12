@@ -1,0 +1,235 @@
+---
+/**
+ * Schema.org JSON-LD 结构化数据组件
+ * 用于 AI GEO 优化和搜索引擎理解
+ * 支持: Organization | WebSite | LocalBusiness | Product | Article | FAQPage | BreadcrumbList | ItemList | ContactPage
+ */
+import siteData from '../data/site.json';
+const { SITE } = siteData;
+
+interface Props {
+  type: 'Organization' | 'WebSite' | 'Product' | 'Article' | 'FAQPage' | 'BreadcrumbList' | 'LocalBusiness' | 'ItemList' | 'ContactPage';
+  data?: Record<string, any>;
+}
+
+const { type, data = {} } = Astro.props;
+
+function organizationSchema() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    '@id': `${SITE.url}#organization`,
+    'name': SITE.name,
+    'alternateName': SITE.alternateName || ['Xiamen Suxin Packaging Technology Co., Ltd.'],
+    'description': SITE.description,
+    'url': SITE.url,
+    'logo': `${SITE.url}favicon.svg`,
+    'foundingDate': SITE.foundingDate,
+    'foundingLocation': {
+      '@type': 'Place',
+      'name': SITE.foundingLocation,
+    },
+    'contactPoint': {
+      '@type': 'ContactPoint',
+      'telephone': `+86-${SITE.phone}`,
+      'contactType': 'customer service',
+      'availableLanguage': ['Chinese', 'English'],
+    },
+    'address': {
+      '@type': 'PostalAddress',
+      'streetAddress': SITE.address,
+      'addressLocality': '厦门',
+      'addressRegion': '福建',
+      'postalCode': '361100',
+      'addressCountry': 'CN',
+    },
+  };
+}
+
+function websiteSchema() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    '@id': `${SITE.url}#website`,
+    'name': SITE.name,
+    'url': SITE.url,
+    'description': SITE.description,
+    'inLanguage': 'zh-CN',
+    'publisher': { '@id': `${SITE.url}#organization` },
+  };
+}
+
+function localBusinessSchema() {
+  const products = data.products || [];
+  const offerCatalog = products.length > 0 ? {
+    '@type': 'OfferCatalog',
+    'name': '产品系列',
+    'itemListElement': products.map((cat: any) => ({
+      '@type': 'OfferCatalog',
+      'name': cat.name,
+      'itemListElement': (cat.items || []).map((p: any) => ({
+        '@type': 'Offer',
+        'itemOffered': {
+          '@type': 'Product',
+          'name': p.name,
+          'url': `${SITE.url}products/${p.id}/`,
+        },
+      })),
+    })),
+  } : undefined;
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'LocalBusiness',
+    '@id': `${SITE.url}#localbusiness`,
+    'name': SITE.name,
+    'alternateName': SITE.alternateName || [],
+    'description': SITE.tagline,
+    'url': SITE.url,
+    'telephone': `+86-${SITE.phone}`,
+    'email': SITE.email,
+    'image': `${SITE.url}favicon.svg`,
+    'priceRange': SITE.priceRange || '¥',
+    'currenciesAccepted': SITE.currenciesAccepted || 'CNY',
+    'paymentAccepted': SITE.paymentAccepted || 'Bank Transfer, WeChat Pay, Alipay',
+    'openingHoursSpecification': {
+      '@type': 'OpeningHoursSpecification',
+      'dayOfWeek': SITE.openingHours?.dayOfWeek || ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+      'opens': SITE.openingHours?.opens || '08:00',
+      'closes': SITE.openingHours?.closes || '18:00',
+    },
+    'address': {
+      '@type': 'PostalAddress',
+      'streetAddress': SITE.address,
+      'addressLocality': '厦门',
+      'addressRegion': '福建',
+      'postalCode': '361100',
+      'addressCountry': 'CN',
+    },
+    'geo': {
+      '@type': 'GeoCoordinates',
+      'latitude': SITE.geo?.latitude || 24.72,
+      'longitude': SITE.geo?.longitude || 118.15,
+    },
+    'areaServed': SITE.areaServed || ['厦漳泉', '福建省', '全国', '全球出口'],
+    ...(offerCatalog ? { hasOfferCatalog: offerCatalog } : {}),
+    ...(SITE.sameAs && SITE.sameAs.length > 0 ? { sameAs: SITE.sameAs } : {}),
+    'makesOffer': {
+      '@type': 'Offer',
+      'description': 'VCI气相防锈袋及工业包装袋定制生产',
+      'availability': 'https://schema.org/InStock',
+      'areaServed': '全球',
+    },
+  };
+}
+
+function productSchema() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    'name': data.name,
+    'description': data.description,
+    'category': data.categoryLabel,
+    'manufacturer': { '@id': `${SITE.url}#organization` },
+    'image': data.image ? `${SITE.url}${data.image}` : undefined,
+    'offers': {
+      '@type': 'Offer',
+      'availability': 'https://schema.org/InStock',
+      'price': '0',
+      'priceCurrency': 'CNY',
+    },
+  };
+}
+
+function articleSchema() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    'headline': data.title,
+    'description': data.description,
+    'datePublished': data.date,
+    'dateModified': data.dateModified || data.date,
+    'author': {
+      '@type': 'Organization',
+      'name': SITE.name,
+    },
+    'publisher': { '@id': `${SITE.url}#organization` },
+    'keywords': data.keywords?.join(', '),
+  };
+}
+
+function faqSchema() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    'mainEntity': (data.questions || []).map((q: { question: string; answer: string }) => ({
+      '@type': 'Question',
+      'name': q.question,
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': q.answer,
+      },
+    })),
+  };
+}
+
+function breadcrumbSchema() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    'itemListElement': (data.items || []).map((item: { label: string; href?: string }, index: number) => ({
+      '@type': 'ListItem',
+      'position': index + 1,
+      'name': item.label,
+      'item': item.href ? `${SITE.url}${item.href}`.replace(/\/\//g, '/').replace(':/', '://') : undefined,
+    })),
+  };
+}
+
+function itemListSchema() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    'name': data.name || '产品列表',
+    'numberOfItems': (data.items || []).length,
+    'itemListElement': (data.items || []).map((item: any, index: number) => ({
+      '@type': 'ListItem',
+      'position': index + 1,
+      'item': {
+        '@type': 'Product',
+        'name': item.name,
+        'url': item.url,
+      },
+    })),
+  };
+}
+
+function contactPageSchema() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'ContactPage',
+    'name': '联系我们 - ' + SITE.name,
+    'description': '联系' + SITE.name + '，获取VCI防锈袋报价、定制咨询、样品申请。电话' + SITE.phone + '。',
+    'url': `${SITE.url}contact/`,
+  };
+}
+
+const schemas: Record<string, () => Record<string, any>> = {
+  Organization: organizationSchema,
+  WebSite: websiteSchema,
+  LocalBusiness: localBusinessSchema,
+  Product: productSchema,
+  Article: articleSchema,
+  FAQPage: faqSchema,
+  BreadcrumbList: breadcrumbSchema,
+  ItemList: itemListSchema,
+  ContactPage: contactPageSchema,
+};
+
+const schemaFn = schemas[type];
+const json = schemaFn ? schemaFn() : null;
+---
+
+{json && (
+  <script type="application/ld+json" set:html={JSON.stringify(json, null, 2)} />
+)}

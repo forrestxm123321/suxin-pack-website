@@ -1,0 +1,113 @@
+---
+/**
+ * 页脚组件 - 升级版，信息更丰富
+ */
+import siteData from '../data/site.json';
+const { SITE, NAV_LINKS } = siteData;
+---
+
+<footer class="bg-gray-900 text-gray-300">
+  <!-- 顶部CTA条 -->
+  <div class="border-b border-gray-800">
+    <div class="container-page py-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div>
+        <p class="text-white font-bold text-lg">准备好开始合作？</p>
+        <p class="text-gray-400 text-sm mt-0.5">源头生产，品质保障，快速响应</p>
+      </div>
+      <div class="flex items-center gap-3">
+        <a href="/contact/" class="btn-primary-sm shadow-sm">
+          获取免费报价
+        </a>
+        <a href={`tel:${SITE.phone.replace(/[^0-9+]/g, '')}`} class="text-sm text-gray-400 hover:text-white transition-colors">
+          或致电 {SITE.phone}
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 主内容区 -->
+  <div class="container-page py-14">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10">
+      <!-- 公司信息 -->
+      <div class="lg:col-span-2">
+        <div class="flex items-center gap-2.5 mb-4">
+          <div class="w-10 h-10 bg-gradient-to-br from-primary-600 to-primary-500 rounded-xl flex items-center justify-center shadow-sm">
+            <span class="text-white font-bold text-lg">塑</span>
+          </div>
+          <div>
+            <div class="text-white font-bold text-base">{SITE.shortName}</div>
+            <div class="text-xs text-gray-500">{SITE.tagline}</div>
+          </div>
+        </div>
+        <p class="text-sm text-gray-400 leading-relaxed mb-5 max-w-sm">
+          {SITE.description.slice(0, 85)}...
+        </p>
+        <div class="flex flex-wrap gap-2">
+          <span class="text-xs bg-gray-800 text-gray-400 px-2.5 py-1 rounded-full">ISO 9001</span>
+          <span class="text-xs bg-gray-800 text-gray-400 px-2.5 py-1 rounded-full">RoHS合规</span>
+          <span class="text-xs bg-gray-800 text-gray-400 px-2.5 py-1 rounded-full">REACH合规</span>
+          <span class="text-xs bg-gray-800 text-gray-400 px-2.5 py-1 rounded-full">SGS认证</span>
+          <span class="text-xs bg-gray-800 text-gray-400 px-2.5 py-1 rounded-full">源头工厂</span>
+        </div>
+      </div>
+
+      <!-- 快速导航 -->
+      <div>
+        <h3 class="text-white font-semibold mb-4 text-sm uppercase tracking-wider">快速导航</h3>
+        <ul class="space-y-2.5">
+          {NAV_LINKS.map((link) => (
+            <li>
+              <a href={'href' in link ? link.href : '#'} class="text-sm text-gray-400 hover:text-white transition-colors">
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- 产品分类 -->
+      <div>
+        <h3 class="text-white font-semibold mb-4 text-sm uppercase tracking-wider">产品分类</h3>
+        <ul class="space-y-2.5">
+          <li><a href="/products/#vci-rustproof" class="text-sm text-gray-400 hover:text-white transition-colors">VCI防锈袋系列</a></li>
+          <li><a href="/products/#pe-bag" class="text-sm text-gray-400 hover:text-white transition-colors">PE塑料袋系列</a></li>
+          <li><a href="/products/#pp-bag" class="text-sm text-gray-400 hover:text-white transition-colors">PP塑料袋系列</a></li>
+          <li><a href="/products/#specialty" class="text-sm text-gray-400 hover:text-white transition-colors">特种功能袋系列</a></li>
+        </ul>
+      </div>
+
+      <!-- 联系方式 -->
+      <div>
+        <h3 class="text-white font-semibold mb-4 text-sm uppercase tracking-wider">联系我们</h3>
+        <ul class="space-y-3">
+          <li class="flex items-start gap-2.5">
+            <span class="text-base shrink-0">📞</span>
+            <a href={`tel:${SITE.phone}`} class="text-sm text-gray-400 hover:text-white transition-colors">{SITE.phone}</a>
+          </li>
+          <li class="flex items-start gap-2.5">
+            <span class="text-base shrink-0">📧</span>
+            <a href={`mailto:${SITE.email}`} class="text-sm text-gray-400 hover:text-white transition-colors break-all">{SITE.email}</a>
+          </li>
+          <li class="flex items-start gap-2.5">
+            <span class="text-base shrink-0">📍</span>
+            <span class="text-sm text-gray-400">{SITE.address}</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 底部版权 -->
+  <div class="border-t border-gray-800">
+    <div class="container-page py-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-sm text-gray-500">
+      <p>&copy; {new Date().getFullYear()} {SITE.name} 版权所有 <span class="mx-2">|</span> 技术支持：厦门岂胜科技有限公司</p>
+      <div class="flex items-center gap-4">
+        <a href="/sitemap.xml" class="hover:text-gray-300 transition-colors">站点地图</a>
+        <a href="/blog/" class="hover:text-gray-300 transition-colors">技术文章</a>
+        <a href="/admin/" class="hover:text-gray-300 transition-colors">内容管理</a>
+        <a href="/contact/" class="hover:text-gray-300 transition-colors">联系我们</a>
+      </div>
+      {SITE.icp && <p>{SITE.icp}</p>}
+    </div>
+  </div>
+</footer>

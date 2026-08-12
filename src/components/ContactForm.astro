@@ -1,0 +1,193 @@
+---
+/**
+ * 联系表单组件 - 提交到 Cloudflare Pages Functions
+ * 含前端验证和 honeypot 防垃圾
+ */
+---
+
+<div class="bg-white rounded-2xl border border-gray-100 shadow-card p-6 sm:p-8">
+  <h3 class="text-xl font-extrabold text-gray-900 mb-6 flex items-center gap-2">📝 发送询价或咨询</h3>
+
+  <form
+    id="contact-form"
+    class="space-y-4"
+    novalidate
+  >
+    <!-- Honeypot 防垃圾（隐藏字段，真人看不到也不会填） -->
+    <div style="position:absolute;left:-9999px" aria-hidden="true">
+      <input type="text" name="website" tabindex="-1" autocomplete="off" />
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <!-- 姓名 -->
+      <div>
+        <label for="name" class="block text-sm font-medium text-gray-700 mb-1.5">
+          联系人姓名 <span class="text-red-500">*</span>
+        </label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          required
+          placeholder="请输入您的姓名"
+          class="input-field"
+        />
+      </div>
+
+      <!-- 电话 -->
+      <div>
+        <label for="phone" class="block text-sm font-medium text-gray-700 mb-1.5">
+          联系电话 <span class="text-red-500">*</span>
+        </label>
+        <input
+          type="tel"
+          id="phone"
+          name="phone"
+          required
+          placeholder="请输入您的手机号"
+          class="input-field"
+        />
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <!-- 公司名称 -->
+      <div>
+        <label for="company" class="block text-sm font-medium text-gray-700 mb-1.5">
+          公司名称
+        </label>
+        <input
+          type="text"
+          id="company"
+          name="company"
+          placeholder="请输入您的公司名称（选填）"
+          class="input-field"
+        />
+      </div>
+
+      <!-- 邮箱 -->
+      <div>
+        <label for="email" class="block text-sm font-medium text-gray-700 mb-1.5">
+          电子邮箱
+        </label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="请输入您的邮箱（选填）"
+          class="input-field"
+        />
+      </div>
+    </div>
+
+    <!-- 留言内容 -->
+    <div>
+      <label for="message" class="block text-sm font-medium text-gray-700 mb-1.5">
+        留言内容 <span class="text-red-500">*</span>
+      </label>
+      <textarea
+        id="message"
+        name="message"
+        rows="4"
+        required
+        placeholder="请描述您的需求，如产品类型、规格尺寸、数量等..."
+        class="input-field resize-y"
+      ></textarea>
+    </div>
+
+    <!-- 提交按钮 -->
+    <div class="pt-2">
+      <button type="submit" class="btn-primary text-base w-full sm:w-auto shadow-[0_4px_16px_rgba(37,99,235,0.25)] hover:shadow-[0_6px_24px_rgba(37,99,235,0.35)] transition-shadow" id="submit-btn">
+        <span id="submit-text">🚀 提交询价</span>
+        <span id="submit-loading" class="hidden">
+          <svg class="animate-spin w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" />
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+          </svg>
+          提交中...
+        </span>
+      </button>
+      <p class="text-xs text-gray-400 mt-2 text-center sm:text-left">提交后1小时内专人对接，24小时内出方案</p>
+    </div>
+
+    <!-- 状态消息 -->
+    <div id="form-message" class="hidden"></div>
+  </form>
+</div>
+
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement;
+  const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement;
+  const submitText = document.getElementById('submit-text') as HTMLElement;
+  const submitLoading = document.getElementById('submit-loading') as HTMLElement;
+  const formMessage = document.getElementById('form-message') as HTMLElement;
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    // Reset message
+    formMessage.classList.add('hidden');
+
+    // Basic validation
+    const name = (document.getElementById('name') as HTMLInputElement).value.trim();
+    const phone = (document.getElementById('phone') as HTMLInputElement).value.trim();
+    const message = (document.getElementById('message') as HTMLTextAreaElement).value.trim();
+
+    if (!name) {
+      showMessage('请输入联系人姓名', 'error');
+      return;
+    }
+    if (!phone) {
+      showMessage('请输入联系电话', 'error');
+      return;
+    }
+    if (!/^1[3-9]\d{9}$/.test(phone)) {
+      showMessage('请输入正确的手机号码', 'error');
+      return;
+    }
+    if (!message) {
+      showMessage('请输入留言内容', 'error');
+      return;
+    }
+
+    // Show loading state
+    submitBtn.disabled = true;
+    submitText.classList.add('hidden');
+    submitLoading.classList.remove('hidden');
+
+    try {
+      const formData = new FormData(form);
+      // Remove honeypot field
+      formData.delete('website');
+
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(Object.fromEntries(formData)),
+      });
+
+      if (response.ok) {
+        showMessage('✅ 提交成功！我们将在24小时内与您联系。', 'success');
+        form.reset();
+      } else {
+        showMessage('提交失败，请稍后重试或直接拨打我们的电话。', 'error');
+      }
+    } catch (err) {
+      showMessage('网络错误，请检查网络后重试或直接拨打我们的电话。', 'error');
+    } finally {
+      submitBtn.disabled = false;
+      submitText.classList.remove('hidden');
+      submitLoading.classList.add('hidden');
+    }
+  });
+
+  function showMessage(text: string, type: 'success' | 'error') {
+    formMessage.textContent = text;
+    formMessage.className = `mt-4 p-4 rounded-lg text-sm ${
+      type === 'success'
+        ? 'bg-green-50 text-green-700 border border-green-200'
+        : 'bg-red-50 text-red-600 border border-red-200'
+    }`;
+    formMessage.classList.remove('hidden');
+  }
+</script>

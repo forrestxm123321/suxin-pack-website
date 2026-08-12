@@ -1,0 +1,85 @@
+---
+/**
+ * 全局布局：SEO Head + Header + slot + Footer + Schema.org JSON-LD
+ */
+import '../styles/global.css';
+import SEOHead from '../components/SEOHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import SchemaOrg from '../components/SchemaOrg.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  keywords?: string;
+  canonicalURL?: string;
+  ogImage?: string;
+  ogType?: 'website' | 'article' | 'product';
+  noindex?: boolean;
+  schemaTypes?: Array<{
+    type: 'Organization' | 'WebSite' | 'Product' | 'Article' | 'FAQPage' | 'BreadcrumbList' | 'LocalBusiness';
+    data?: Record<string, any>;
+  }>;
+}
+
+const {
+  title,
+  description,
+  keywords = '',
+  canonicalURL,
+  ogImage,
+  ogType = 'website',
+  noindex = false,
+  schemaTypes = [],
+} = Astro.props;
+
+// 默认 Organization schema，所有页面都有
+const allSchemas = [
+  { type: 'Organization' as const, data: {} },
+  ...schemaTypes,
+];
+---
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <SEOHead
+      title={title}
+      description={description}
+      keywords={keywords}
+      canonicalURL={canonicalURL}
+      ogImage={ogImage}
+      ogType={ogType}
+      noindex={noindex}
+    />
+    <!-- 预加载关键资源 -->
+    <link rel="dns-prefetch" href="//www.suxinpack.com" />
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <Header />
+    <main class="flex-1">
+      <slot />
+    </main>
+    <Footer />
+
+    <!-- Schema.org JSON-LD -->
+    {allSchemas.map((schema, i) => (
+      <SchemaOrg key={i} type={schema.type} data={schema.data} />
+    ))}
+
+    <!-- 百度站长自动推送（需先在 https://ziyuan.baidu.com/ 验证网站所有权） -->
+    <script>
+      (function(){
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+          bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+          bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(bp, s);
+      })();
+    </script>
+  </body>
+</html>

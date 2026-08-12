@@ -1,0 +1,90 @@
+---
+/**
+ * 首页 Hero - 工业科技风重设计
+ */
+import siteData from '../data/site.json';
+const { SITE } = siteData;
+---
+
+<section class="relative overflow-hidden gradient-hero text-white">
+  <!-- 网格背景 -->
+  <div class="absolute inset-0 bg-grid opacity-30"></div>
+  <!-- 点阵装饰 -->
+  <div class="absolute inset-0 bg-dots opacity-20"></div>
+  <!-- 光晕 -->
+  <div class="absolute -top-40 -right-40 w-[600px] h-[600px] bg-primary-400/15 rounded-full blur-[120px]"></div>
+  <div class="absolute -bottom-40 -left-40 w-[500px] h-[500px] bg-accent-500/10 rounded-full blur-[100px]"></div>
+
+  <div class="relative container-page py-20 sm:py-28 lg:py-36">
+    <div class="max-w-4xl mx-auto">
+      <!-- 标签行 -->
+      <div class="flex flex-wrap justify-center gap-3 mb-8">
+        <span class="inline-flex items-center gap-1.5 bg-white/10 backdrop-blur-sm rounded-full px-4 py-1.5 text-sm font-medium border border-white/10">
+          <span class="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse"></span>
+          源头厂家
+        </span>
+        <span class="inline-flex items-center gap-1.5 bg-white/10 backdrop-blur-sm rounded-full px-4 py-1.5 text-sm font-medium border border-white/10">
+          <span class="w-1.5 h-1.5 bg-green-400 rounded-full"></span>
+          自有产线
+        </span>
+        <span class="inline-flex items-center gap-1.5 bg-white/10 backdrop-blur-sm rounded-full px-4 py-1.5 text-sm font-medium border border-white/10">
+          <span class="w-1.5 h-1.5 bg-green-400 rounded-full"></span>
+          出口合规
+        </span>
+        <span class="inline-flex items-center gap-1.5 bg-white/10 backdrop-blur-sm rounded-full px-4 py-1.5 text-sm font-medium border border-white/10">
+          <span class="w-1.5 h-1.5 bg-green-400 rounded-full"></span>
+          交期保障
+        </span>
+      </div>
+
+      <!-- 主标题 -->
+      <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold leading-tight text-center mb-6 tracking-tight">
+        <span class="text-white">VCI气相防锈袋</span><br class="sm:hidden" />
+        <span class="text-emerald-300">
+          源头生产厂家
+        </span>
+      </h1>
+
+      <!-- 副标题 -->
+      <p class="text-xl sm:text-2xl text-white/90 text-center mb-3 text-balance font-semibold">
+        自有<span class="text-white">吹膜 · 印刷 · 制袋</span>全套生产线
+      </p>
+      <p class="text-base text-white/85 text-center mb-10 max-w-2xl mx-auto">
+        自产自销，为汽配·新能源·五金·模具·电箱电柜·工程机械行业<br class="hidden sm:block" />
+        提供防锈、防潮、防尘一站式工业包装解决方案
+      </p>
+
+      <!-- CTA 按钮 -->
+      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-14">
+        <a href="/contact/" class="btn-primary text-lg px-10 py-4 rounded-2xl !bg-primary-600 hover:!bg-primary-700 font-bold shadow-[0_4px_20px_rgba(37,99,235,0.35)] hover:shadow-[0_6px_28px_rgba(37,99,235,0.5)] transition-all duration-300">
+          立即获取报价
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+          </svg>
+        </a>
+        <a href="/products/" class="inline-flex items-center gap-2 bg-white/95 hover:bg-white text-primary-700 border border-white/50 hover:border-primary-300 rounded-2xl px-10 py-4 font-bold text-lg transition-all duration-300 shadow-[0_4px_16px_rgba(0,0,0,0.1)]">
+          查看产品
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
+        </a>
+      </div>
+
+      <!-- 信任指标 -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+        {[
+          ['🏭', '全套产线', '吹膜·印刷·制袋'],
+          ['🏗️', '源头工厂', '自产自销零中间商'],
+          ['🚀', '交期快速', '常规3-5天交付'],
+          ['✅', '出口合规', 'RoHS/REACH/SGS认证'],
+        ].map(([icon, title, desc]) => (
+          <div class="group flex flex-col items-center p-4 rounded-2xl bg-white/[0.12] border border-white/[0.20] hover:bg-white/[0.18] hover:border-white/30 hover:-translate-y-0.5 transition-all duration-300">
+            <span class="text-2xl mb-2 group-hover:scale-110 transition-transform duration-300">{icon}</span>
+            <div class="text-sm font-bold text-white">{title}</div>
+            <div class="text-xs text-white/75 mt-0.5">{desc}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

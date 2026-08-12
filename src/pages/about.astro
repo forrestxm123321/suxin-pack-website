@@ -1,0 +1,214 @@
+---
+/**
+ * 关于我们 - 视觉重设计
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import AdvantageCard from '../components/AdvantageCard.astro';
+import siteData from '../data/site.json';
+const { SITE, ADVANTAGES, COMPANY_STATS, PRODUCTION_FLOW } = siteData;
+const companyIntro: string = (SITE as any).companyIntro || `${SITE.name}是专业从事VCI气相防锈袋及各类工业塑料包装袋研发、生产和销售的一体化企业。`;
+
+const pageTitle = '关于我们_VCI防锈袋源头生产厂家';
+const pageDescription = '厦门塑鑫包装科技有限公司是VCI气相防锈袋源头生产厂家，自有吹膜、印刷、制袋全套生产线，自产自销。专注为汽配、新能源、五金、模具等行业提供防锈、防潮、防尘工业包装解决方案。';
+const pageKeywords = '厦门塑鑫包装,防锈袋厂家,塑料包装袋生产厂家,VCI防锈袋工厂,工业包装袋源头工厂';
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  keywords={pageKeywords}
+  canonicalURL="/about/"
+  ogType="website"
+  schemaTypes={[
+    { type: 'BreadcrumbList', data: { items: [{ label: '首页', href: '/' }, { label: '关于我们' }] } },
+    { type: 'LocalBusiness', data: {} },
+  ]}
+>
+  <!-- Hero -->
+  <section class="bg-carbon-900 bg-gradient-to-br from-carbon-900 via-primary-950 to-primary-900 text-white py-16 sm:py-20 relative overflow-hidden">
+    <div class="absolute inset-0 bg-grid opacity-20"></div>
+    <div class="relative container-page text-center">
+      <span class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-1.5 text-sm font-medium mb-6 border border-white/10"><span class="w-1.5 h-1.5 bg-green-400 rounded-full"></span>关于我们</span>
+      <h1 class="text-3xl sm:text-5xl font-extrabold mb-4">源头生产，品质为本</h1>
+      <p class="text-lg text-white/85 max-w-2xl mx-auto">专注工业塑料包装领域，为客户提供值得信赖的一站式包装解决方案</p>
+    </div>
+  </section>
+
+  <!-- 面包屑 -->
+  <div class="bg-gray-50 border-b border-gray-100">
+    <div class="container-page py-3"><nav class="breadcrumb"><a href="/">首页</a><svg class="sep" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg><span class="text-gray-600 font-medium">关于我们</span></nav></div>
+  </div>
+
+  <!-- 公司简介 + 数据 -->
+  <section class="section">
+    <div class="container-page">
+      <div class="grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-14 items-start">
+        <div class="lg:col-span-3">
+          <h2 class="text-3xl font-extrabold text-gray-900 mb-6">公司简介</h2>
+          <div class="space-y-4 text-gray-600 leading-relaxed">
+            {companyIntro.split('\n\n').map(para => para.trim()).filter(Boolean).map(para => (
+              <p>{para}</p>
+            ))}
+          </div>
+        </div>
+        <div class="lg:col-span-2 grid grid-cols-2 gap-4">
+          {COMPANY_STATS.map((s) => (
+            <div class="bg-white rounded-2xl p-5 border border-gray-100 text-center shadow-[0_2px_12px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)] hover:-translate-y-0.5 transition-all duration-300">
+              <div class="text-3xl sm:text-4xl font-extrabold text-gradient mb-2">{s.value}</div>
+              <div class="text-xs text-gray-500 font-medium">{s.label}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 生产工艺 -->
+  <section class="section bg-gray-50/50">
+    <div class="container-page">
+      <div class="text-center"><span class="section-badge">⚙️ 生产实力</span></div>
+      <h2 class="section-title">生产工艺流程</h2>
+      <p class="section-subtitle">六大工序环环相扣，品质全程可控</p>
+
+      <!-- 桌面流程 -->
+      <div class="hidden lg:grid grid-cols-6 gap-3 relative mb-4">
+        {PRODUCTION_FLOW.map((item, i) => (
+          <div class="text-center relative">
+            {i < PRODUCTION_FLOW.length - 1 && (
+              <div class="absolute top-9 left-[calc(50%+1.5rem)] w-[calc(100%-2rem)] h-0.5">
+                <div class="h-full bg-gradient-to-r from-primary-300 to-primary-100"></div>
+              </div>
+            )}
+            <div class="relative z-10 w-[72px] h-[72px] mx-auto bg-white rounded-2xl border-2 border-primary-200 flex items-center justify-center text-2xl font-extrabold text-primary-700 shadow-sm mb-3">{item.step}</div>
+            <h4 class="font-bold text-gray-900 text-sm mb-1">{item.title}</h4>
+            <p class="text-xs text-gray-400 leading-snug">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+      <div class="lg:hidden grid grid-cols-1 sm:grid-cols-2 gap-4">
+        {PRODUCTION_FLOW.map((item) => (
+          <div class="flex items-start gap-4 bg-white rounded-2xl p-5 border border-gray-100 shadow-card">
+            <div class="shrink-0 w-12 h-12 bg-gradient-to-br from-primary-500 to-primary-600 text-white rounded-2xl flex items-center justify-center text-lg font-extrabold">{item.step}</div>
+            <div><h4 class="font-bold text-gray-900 text-sm mb-1">{item.title}</h4><p class="text-xs text-gray-500">{item.desc}</p></div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 三大车间 -->
+  <section class="section">
+    <div class="container-page">
+      <div class="text-center"><span class="section-badge">🏗️ 生产车间</span></div>
+      <h2 class="section-title">三大生产车间</h2>
+      <p class="section-subtitle">吹膜、印刷、制袋全产业链制造能力</p>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {[
+          { title: '吹膜车间', icon: '🏗️', items: '多层共挤吹膜 · VCI在线添加 · 厚度0.03-0.20mm · 宽幅50-3000mm · LDPE/HDPE/LLDPE' },
+          { title: '印刷车间', icon: '🎨', items: '高速柔版印刷 · 单色-多色 · 定制Logo · 环保水性油墨 · 印刷牢固耐磨' },
+          { title: '制袋车间', icon: '⚙️', items: '全自动制袋线 · 多袋型兼容 · 精准控温密封 · 焊缝牢固平整 · 在线质检系统' },
+        ].map((ws) => (
+          <div class="card-hover-lift overflow-hidden">
+            <div class="bg-gradient-to-br from-primary-600 to-primary-800 p-6 text-white text-center">
+              <span class="text-5xl block mb-4">{ws.icon}</span>
+              <h3 class="text-xl font-extrabold">{ws.title}</h3>
+            </div>
+            <div class="p-6 space-y-2">
+              {ws.items.split(' · ').map((item) => (
+                <div class="flex items-start gap-2">
+                  <svg class="w-4 h-4 text-green-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                  <span class="text-sm text-gray-600">{item}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 核心优势 -->
+  <section class="section bg-gray-50/50">
+    <div class="container-page">
+      <div class="text-center"><span class="section-badge">⭐ 核心优势</span></div>
+      <h2 class="section-title">我们的优势</h2>
+      <p class="section-subtitle">六大核心优势，为客户创造持久价值</p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {ADVANTAGES.map((adv, i) => (
+          <AdvantageCard icon={adv.icon} title={adv.title} description={adv.description} index={i} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 资质认证 -->
+  <section class="section bg-white">
+    <div class="container-page">
+      <div class="text-center"><span class="section-badge-green">🏅 资质认证</span></div>
+      <h2 class="section-title">国际权威认证</h2>
+      <p class="section-subtitle">产品通过多项国际检测认证，品质值得信赖</p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        {[
+          { name: 'ISO 9001', sub: '质量管理体系', icon: '📋', desc: '国际标准化组织质量管理体系认证，确保生产全过程品质可控。' },
+          { name: 'SGS 检测认证', sub: 'SGS Testing & Certification', icon: '🔬', desc: '全球领先的检验、鉴定、测试和认证机构SGS出具的产品检测报告。', link: '/certificates/' },
+          { name: 'RoHS 合规', sub: '有害物质限制', icon: '🌿', desc: '产品符合欧盟RoHS指令，铅、汞、镉等有害物质含量远低于限值。' },
+          { name: 'REACH 合规', sub: '化学品注册评估', icon: '✅', desc: '符合欧盟REACH法规，化学品安全使用，适配出口欧盟市场。' },
+        ].map((cert) => (
+          <div class="card-hover-lift overflow-hidden">
+            <div class="bg-gradient-to-br from-green-600 to-green-700 p-6 text-white text-center">
+              <span class="text-4xl block mb-3">{cert.icon}</span>
+              <h3 class="text-lg font-extrabold">{cert.name}</h3>
+              <p class="text-green-100 text-xs mt-1">{cert.sub}</p>
+            </div>
+            <div class="p-5">
+              <p class="text-sm text-gray-600 leading-relaxed">{cert.desc}</p>
+              {'link' in cert ? (
+                <a href={cert.link} class="inline-flex items-center gap-1 mt-3 text-sm font-semibold text-green-600 hover:text-green-700 transition-colors">
+                  查看证书 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                </a>
+              ) : (
+                <span class="inline-block mt-3 text-xs text-green-600 font-medium">已获认证 ✓</span>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 合作流程 -->
+  <section class="section">
+    <div class="container-page">
+      <div class="text-center"><span class="section-badge">🤝 合作流程</span></div>
+      <h2 class="section-title">合作流程</h2>
+      <p class="section-subtitle">四步开启合作，简单高效</p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        {[
+          ['01', '需求沟通', '📋', '告知产品类型、规格、数量'],
+          ['02', '样品确认', '🧪', '提供样品测试，确保满足需求'],
+          ['03', '批量生产', '🏭', '自有产线快速生产，严格品控'],
+          ['04', '交付售后', '🚀', '准时发货，全程技术售后支持'],
+        ].map(([step, title, icon, desc]) => (
+          <div class="text-center bg-white rounded-2xl p-6 border border-gray-100 shadow-card hover:shadow-elevated transition-all duration-300">
+            <span class="text-4xl block mb-4">{icon}</span>
+            <div class="w-10 h-10 mx-auto bg-primary-100 text-primary-700 rounded-full flex items-center justify-center text-sm font-extrabold mb-3">{step}</div>
+            <h3 class="font-bold text-gray-900 mb-2">{title}</h3>
+            <p class="text-sm text-gray-500">{desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section bg-gradient-to-r from-primary-600 via-primary-700 to-primary-800 text-white">
+    <div class="container-page text-center">
+      <h2 class="text-3xl font-extrabold mb-3">携手塑鑫包装，共赢未来</h2>
+      <p class="text-white/70 mb-8 max-w-xl mx-auto">源头生产、品质可靠、交期快速、价格实在。欢迎来电咨询或来厂考察。</p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/contact/" class="btn-white !text-primary-700 text-lg px-10 py-4 rounded-2xl font-bold shadow-lg">立即联系我们</a>
+        <a href="/cases/" class="btn-outline-white">查看客户案例</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

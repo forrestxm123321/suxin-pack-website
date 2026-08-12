@@ -1,0 +1,72 @@
+---
+/**
+ * 技术文章列表 - 视觉重设计
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const articles = await getCollection('articles');
+
+const pageTitle = '技术文章_工业包装知识科普';
+const pageDescription = '厦门塑鑫包装技术文章栏目，分享VCI气相防锈技术、工业塑料包装袋选型指南、防锈包装方案对比等专业知识，帮助客户选择最合适的包装解决方案。';
+const pageKeywords = 'VCI防锈知识,防锈袋原理,工业包装选型,PE袋PP袋对比,防锈包装技术';
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  keywords={pageKeywords}
+  canonicalURL="/blog/"
+  ogType="website"
+  schemaTypes={[{ type: 'BreadcrumbList', data: { items: [{ label: '首页', href: '/' }, { label: '技术文章' }] } }]}
+>
+  <!-- Hero -->
+  <section class="bg-carbon-900 bg-gradient-to-br from-carbon-900 via-primary-950 to-primary-900 text-white py-16 sm:py-20 relative overflow-hidden">
+    <div class="absolute inset-0 bg-grid opacity-20"></div>
+    <div class="relative container-page text-center">
+      <span class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-1.5 text-sm font-medium mb-6 border border-white/10"><span class="w-1.5 h-1.5 bg-green-400 rounded-full"></span>技术文章</span>
+      <h1 class="text-3xl sm:text-5xl font-extrabold mb-4">工业包装知识分享</h1>
+      <p class="text-lg text-white/85 max-w-2xl mx-auto">分享VCI防锈技术、包装选型指南等行业专业知识，帮助您做出更明智的包装选择</p>
+    </div>
+  </section>
+
+  <!-- 面包屑 -->
+  <div class="bg-gray-50 border-b border-gray-100">
+    <div class="container-page py-3"><nav class="breadcrumb"><a href="/">首页</a><svg class="sep" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg><span class="text-primary-600 font-semibold">技术文章</span></nav></div>
+  </div>
+
+  <!-- 文章列表 -->
+  <section class="section">
+    <div class="container-page">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {articles.map((article) => {
+          const { title, description, date, category, keywords } = article.data;
+          return (
+          <a href={`/blog/${article.slug}/`} class="card-hover-lift block overflow-hidden group/card">
+            <div class={`h-44 bg-gradient-to-br flex items-center justify-center relative overflow-hidden ${
+              category === 'VCI防锈技术' ? 'from-blue-200 to-blue-100/40' :
+              category === '防锈包装' ? 'from-emerald-200 to-emerald-100/40' :
+              'from-violet-200 to-violet-100/40'
+            }`}>
+              <span class="text-6xl opacity-30 group-hover/card:opacity-40 group-hover/card:scale-110 transition-all duration-500">{category === 'VCI防锈技术' ? '🛡️' : category === '防锈包装' ? '📦' : '📋'}</span>
+              <span class="absolute top-4 left-4 badge-primary text-xs">{category}</span>
+            </div>
+            <div class="p-5">
+              {date && <time datetime={date} class="text-xs text-gray-400 font-medium">{date}</time>}
+              <h2 class="text-lg font-extrabold text-gray-900 mt-3 mb-3 group-hover/card:text-primary-700 transition-colors leading-snug">{title}</h2>
+              <p class="text-sm text-gray-500 leading-relaxed mb-4 line-clamp-2">{description}</p>
+              <div class="flex flex-wrap gap-1.5">
+                {keywords.slice(0, 3).map((kw) => (<span class="badge-gray text-xs">{kw}</span>))}
+              </div>
+            </div>
+          </a>
+        )})}
+      </div>
+
+      <div class="mt-16 text-center bg-gray-50/50 rounded-2xl p-10 border border-gray-100">
+        <h3 class="text-xl font-bold text-gray-700 mb-2">更多技术文章持续更新中</h3>
+        <p class="text-sm text-gray-400">我们将定期分享工业包装领域的专业知识，欢迎关注或联系我们获取更多技术资料。</p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

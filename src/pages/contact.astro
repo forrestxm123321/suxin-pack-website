@@ -1,0 +1,102 @@
+---
+/**
+ * 联系我们 - 视觉重设计
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ContactForm from '../components/ContactForm.astro';
+import siteData from '../data/site.json';
+const { SITE } = siteData;
+
+const pageTitle = '联系我们_获取报价与咨询';
+const pageDescription = '联系厦门塑鑫包装科技有限公司，获取VCI防锈袋、PE袋、PP袋等工业包装袋的报价和技术支持。源头厂家直销，免费咨询，快速响应。';
+const pageKeywords = '联系塑鑫包装,防锈袋报价,工业包装袋咨询,塑料包装袋厂家联系方式';
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  keywords={pageKeywords}
+  canonicalURL="/contact/"
+  ogType="website"
+  schemaTypes={[
+    { type: 'BreadcrumbList', data: { items: [{ label: '首页', href: '/' }, { label: '联系我们' }] } },
+    { type: 'LocalBusiness', data: {} },
+  ]}
+>
+  <!-- Hero -->
+  <section class="bg-carbon-900 bg-gradient-to-br from-carbon-900 via-primary-950 to-primary-900 text-white py-16 sm:py-20 relative overflow-hidden">
+    <div class="absolute inset-0 bg-grid opacity-20"></div>
+    <div class="relative container-page text-center">
+      <span class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-1.5 text-sm font-medium mb-6 border border-white/10"><span class="w-1.5 h-1.5 bg-green-400 rounded-full"></span>联系我们</span>
+      <h1 class="text-3xl sm:text-5xl font-extrabold mb-4">获取报价与咨询</h1>
+      <p class="text-lg text-white/85 max-w-2xl mx-auto">无论您是询价、定制还是技术咨询，我们都将竭诚为您服务</p>
+    </div>
+  </section>
+
+  <!-- 面包屑 -->
+  <div class="bg-gray-50 border-b border-gray-100">
+    <div class="container-page py-3"><nav class="breadcrumb"><a href="/">首页</a><svg class="sep" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg><span class="text-gray-600 font-medium">联系我们</span></nav></div>
+  </div>
+
+  <!-- 内容区 -->
+  <section class="section">
+    <div class="container-page">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-10">
+        <!-- 左侧信息 -->
+        <div class="space-y-5">
+          <div class="bg-gradient-to-br from-primary-50 to-white rounded-2xl p-6 border border-primary-100 shadow-card">
+            <h3 class="font-extrabold text-primary-900 mb-4 flex items-center gap-2">📋 联系方式</h3>
+            <ul class="space-y-4">
+              <li class="flex items-start gap-3">
+                <div class="w-10 h-10 bg-primary-100 rounded-xl flex items-center justify-center text-lg shrink-0">📞</div>
+                <div><p class="text-xs text-gray-400">联系电话</p><p class="font-bold text-gray-900">{SITE.phone}</p></div>
+              </li>
+              <li class="flex items-start gap-3">
+                <div class="w-10 h-10 bg-primary-100 rounded-xl flex items-center justify-center text-lg shrink-0">📧</div>
+                <div><p class="text-xs text-gray-400">电子邮箱</p><p class="font-bold text-gray-900 text-sm break-all">{SITE.email}</p></div>
+              </li>
+              <li class="flex items-start gap-3">
+                <div class="w-10 h-10 bg-primary-100 rounded-xl flex items-center justify-center text-lg shrink-0">📍</div>
+                <div><p class="text-xs text-gray-400">公司地址</p><p class="font-bold text-gray-900">{SITE.address}</p></div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-card">
+            <h3 class="font-bold text-gray-900 mb-3">⏰ 工作时间</h3>
+            <ul class="space-y-2 text-sm text-gray-600">
+              <li>周一至周五：8:00 - 18:00</li>
+              <li>周六：8:00 - 12:00</li>
+              <li>周日：休息</li>
+            </ul>
+            <p class="text-xs text-gray-400 mt-3">非工作时间留言，上班后第一时间回复</p>
+          </div>
+
+          <div class="bg-green-50 rounded-2xl p-6 border border-green-100">
+            <h3 class="font-bold text-green-800 mb-3">✅ 我们的承诺</h3>
+            <ul class="space-y-2 text-sm text-green-700">
+              <li>✅ 24小时内响应询价</li>
+              <li>✅ 免费提供常规样品</li>
+              <li>✅ 免费技术咨询与选型</li>
+              <li>✅ 支持来厂考察验厂</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 右侧表单 -->
+        <div class="lg:col-span-2">
+          <ContactForm />
+          <!-- FAQ -->
+          <div class="mt-8 bg-gray-50/50 rounded-2xl p-6 sm:p-8 border border-gray-100">
+            <h3 class="font-bold text-gray-900 mb-4">❓ 常见问题</h3>
+            <div class="space-y-4">
+              <div><h4 class="font-semibold text-gray-800 text-sm mb-1">Q: 如何获取报价？</h4><p class="text-sm text-gray-500">请通过表单或电话告知产品类型、规格、数量，24小时内提供详细报价。</p></div>
+              <div><h4 class="font-semibold text-gray-800 text-sm mb-1">Q: 是否提供免费样品？</h4><p class="text-sm text-gray-500">常规规格产品可提供免费样品，定制规格需协商模具费用。</p></div>
+              <div><h4 class="font-semibold text-gray-800 text-sm mb-1">Q: 生产周期多长？</h4><p class="text-sm text-gray-500">常规订单3-7天交货，定制7-15天，大批量另行协商。</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
