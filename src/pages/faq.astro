@@ -47,26 +47,24 @@ const faqWithCat = faqQuestions.map((q, i) => {
     { type: 'WebSite', data: {} },
   ]}
 >
-  <!-- Header -->
-  <section class="relative overflow-hidden bg-gradient-to-br from-primary-700 via-primary-600 to-blue-700 text-white">
+  <!-- Hero -->
+  <section class="bg-carbon-900 bg-gradient-to-br from-carbon-900 via-primary-950 to-primary-900 text-white py-16 sm:py-20 relative overflow-hidden">
     <div class="absolute inset-0 bg-grid opacity-20"></div>
-    <div class="absolute -top-40 -right-40 w-80 h-80 bg-white/5 rounded-full"></div>
-    <div class="relative container-page py-16 sm:py-20 text-center">
-      <h1 class="text-3xl sm:text-4xl font-extrabold mb-3">❓ VCI气相防锈袋 · 常见问题</h1>
-      <p class="text-lg text-white/90 mb-2">{SITE.shortName} — 源头生产厂家 · 专业解答</p>
-      <p class="text-sm text-white/70">
-        📞 立即咨询：<a href="tel:{SITE.phone}" class="text-yellow-300 font-bold hover:underline">{SITE.phone}</a>
-        {SITE.phone2 && (<> / <a href="tel:{SITE.phone2}" class="text-yellow-300 font-bold hover:underline">{SITE.phone2}</a></>)}
-        &nbsp;|&nbsp; 📧 <a href="mailto:{SITE.email}" class="text-yellow-300 hover:underline">{SITE.email}</a>
-      </p>
+    <div class="relative container-page text-center">
+      <span class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-1.5 text-sm font-medium mb-6 border border-white/10"><span class="w-1.5 h-1.5 bg-green-400 rounded-full"></span>常见问题</span>
+      <h1 class="text-3xl sm:text-5xl font-extrabold mb-4">VCI气相防锈袋 · 常见问题</h1>
+      <p class="text-lg text-white/85 max-w-2xl mx-auto">{SITE.shortName} — 源头生产厂家 · 专业解答</p>
     </div>
   </section>
 
-  <!-- Breadcrumb -->
-  <div class="container-page py-4">
-    <nav class="text-sm text-gray-500" aria-label="面包屑导航">
-      🏠 <a href="/" class="text-primary-600 hover:underline">首页</a> › <span class="text-gray-900 font-medium">常见问题</span>
-    </nav>
+  <!-- 面包屑 -->
+  <div class="bg-gray-50 border-b border-gray-100">
+    <div class="container-page py-3">
+      <nav class="breadcrumb">
+        <a href="/">首页</a><svg class="sep" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        <span class="text-gray-600 font-medium">常见问题</span>
+      </nav>
+    </div>
   </div>
 
   <!-- Category filter -->
