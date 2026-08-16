@@ -43,6 +43,8 @@ function organizationSchema() {
       'postalCode': '361100',
       'addressCountry': 'CN',
     },
+    'knowsAbout': ['VCI气相防锈袋', '工业塑料包装袋', '防锈包装', '吹膜印刷制袋'],
+    ...(SITE.sameAs && SITE.sameAs.length > 0 ? { sameAs: SITE.sameAs } : {}),
   };
 }
 
@@ -94,7 +96,7 @@ function localBusinessSchema() {
     'paymentAccepted': SITE.paymentAccepted || 'Bank Transfer, WeChat Pay, Alipay',
     'openingHoursSpecification': {
       '@type': 'OpeningHoursSpecification',
-      'dayOfWeek': SITE.openingHours?.dayOfWeek || ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+      'dayOfWeek': SITE.openingHours?.dayOfWeek || ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
       'opens': SITE.openingHours?.opens || '08:00',
       'closes': SITE.openingHours?.closes || '18:00',
     },
@@ -131,12 +133,15 @@ function productSchema() {
     'description': data.description,
     'category': data.categoryLabel,
     'manufacturer': { '@id': `${SITE.url}#organization` },
-    'image': data.image ? `${SITE.url}${data.image}` : undefined,
+    'brand': { '@type': 'Brand', 'name': SITE.shortName },
+    'image': data.image ? `${SITE.url}${data.image}`.replace(/\/{2,}/g, '/').replace(':/', '://') : undefined,
+    'url': data.id ? `${SITE.url}products/${data.id}/` : undefined,
+    // B2B 询价制产品，不标无效价格，仅声明有货
     'offers': {
       '@type': 'Offer',
       'availability': 'https://schema.org/InStock',
-      'price': '0',
-      'priceCurrency': 'CNY',
+      'itemCondition': 'https://schema.org/NewCondition',
+      'url': data.id ? `${SITE.url}products/${data.id}/` : undefined,
     },
   };
 }
