@@ -1,0 +1,7 @@
+# 旧产品URL → 新产品URL 301 永久跳转（GEO/SEO 修复）
+/products/vci-square-bottom-bag/ /products/vci-gusset-bag/ 301
+/products/vci-zipper-bag/ /products/vci-zip-bag/ 301
+/products/pe-square-bottom-bag/ /products/pe-gusset-bag/ 301
+/products/pe-zipper-bag/ /products/ziplock-bag/ 301
+/products/opp-bag/ /products/pp-opp-bag/ 301
+/products/vacuum-bag/ /products/double-zip-vacuum/ 301
