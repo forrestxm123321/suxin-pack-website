@@ -1,10 +1,11 @@
 import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
+import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://suxin-pack.pages.dev', // 部署后替换为实际域名
-  integrations: [tailwind()],
+  site: 'https://suxinpack.cn',
+  integrations: [tailwind(), sitemap()],
   output: 'static',
   build: {
     assets: 'assets',
