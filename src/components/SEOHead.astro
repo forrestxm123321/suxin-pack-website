@@ -27,7 +27,11 @@ const {
 } = Astro.props;
 
 const fullTitle = title.includes(SITE.shortName) ? title : `${title} - ${SITE.shortName}`;
-const canonical = canonicalURL ? `${SITE.url}${canonicalURL}` : undefined;
+// canonical 始终生成（首页为 self-canonical），并修复双斜杠拼接
+const baseUrl = SITE.url.replace(/\/+$/, '');
+const canonical = canonicalURL
+  ? `${baseUrl}${canonicalURL.startsWith('/') ? '' : '/'}${canonicalURL}`
+  : `${baseUrl}/`;
 ---
 
 <!-- 百度 SEO 核心 TDK 标签 -->
@@ -55,7 +59,7 @@ const canonical = canonicalURL ? `${SITE.url}${canonicalURL}` : undefined;
 <meta property="og:url" content={canonical || SITE.url} />
 <meta property="og:site_name" content={SITE.name} />
 <meta property="og:locale" content="zh_CN" />
-<meta property="og:image" content={`${SITE.url}${ogImage}`} />
+<meta property="og:image" content={`${baseUrl}${ogImage.startsWith('/') ? '' : '/'}${ogImage}`} />
 
 <!-- 移动端适配（百度移动优先） -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
