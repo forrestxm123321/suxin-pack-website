@@ -1,4 +1,6 @@
 ---
+author: "塑鑫包装技术团队"
+
 title: "什么是VCI气相防锈？VCI防锈袋工作原理详解"
 description: "深入了解VCI（Volatile Corrosion Inhibitor）气相防锈技术的工作原理，以及VCI防锈袋在金属零部件防锈保护中的应用优势和选型指南。"
 date: "2026-06-15"
