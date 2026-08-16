@@ -6,13 +6,15 @@
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "prebuild": "node scripts/compress-images.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",
     "@astrojs/tailwind": "^6.0.0",
     "astro": "^5.0.0",
     "playwright": "^1.62.1",
+    "sharp": "^0.35.3",
     "tailwindcss": "^3.4.0"
   }
 }
