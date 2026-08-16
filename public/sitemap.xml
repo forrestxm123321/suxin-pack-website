@@ -31,6 +31,12 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+  <!-- 常见问题 -->
+  <url>
+    <loc>https://suxinpack.cn/faq/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
   <!-- 联系我们 -->
   <url>
     <loc>https://suxinpack.cn/contact/</loc>
@@ -69,14 +75,44 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://suxinpack.cn/products/vci-square-bottom-bag/</loc>
+    <loc>https://suxinpack.cn/products/vci-gusset-bag/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://suxinpack.cn/products/vci-zipper-bag/</loc>
+    <loc>https://suxinpack.cn/products/vci-zip-bag/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://suxinpack.cn/products/vci-bag/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://suxinpack.cn/products/vci-general-bag/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://suxinpack.cn/products/vci-heavy-duty-bag/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://suxinpack.cn/products/vci-flat-bag1/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://suxinpack.cn/products/vci-flat-bag2/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://suxinpack.cn/products/vci-flat-bag3/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://suxinpack.cn/products/pe-flat-bag/</loc>
@@ -84,12 +120,12 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://suxinpack.cn/products/pe-square-bottom-bag/</loc>
+    <loc>https://suxinpack.cn/products/pe-gusset-bag/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://suxinpack.cn/products/pe-zipper-bag/</loc>
+    <loc>https://suxinpack.cn/products/ziplock-bag/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -99,12 +135,12 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://suxinpack.cn/products/opp-bag/</loc>
+    <loc>https://suxinpack.cn/products/pp-opp-bag/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://suxinpack.cn/products/vacuum-bag/</loc>
+    <loc>https://suxinpack.cn/products/double-zip-vacuum/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
