@@ -210,31 +210,63 @@
     },
     {
       "id": "vci-bag",
-      "name": "VCI气相防锈袋",
+      "name": "VCI气相防锈袋（标准型）",
       "category": "vci-rustproof",
       "categoryLabel": "VCI防锈袋系列",
-      "description": "VCI气相防锈袋",
-      "features": [],
-      "specs": [],
+      "description": "标准型VCI气相防锈袋，通过释放气相缓蚀剂在金属表面形成分子级保护层，无需涂油即可实现6个月至2年的防锈保护。适用于汽配零部件、五金件、模具等金属制品的包装、仓储与运输。",
+      "features": [
+        "气相防锈技术，开袋即用，无需涂油清洗",
+        "多金属通用，适用于铁、钢、铜、铝等材质",
+        "防锈保护期6个月至2年，密封包装长效防护",
+        "符合RoHS、REACH环保标准，适配出口"
+      ],
+      "specs": [
+        "材质：LDPE/HDPE + VCI防锈母粒",
+        "厚度：0.06-0.20mm 可定制",
+        "宽幅：100-3000mm 可定制",
+        "印刷：支持单色至多色Logo印刷"
+      ],
       "image": "/images/uploads/5009f14c4cba8841357f3240fc48f0c7.jpeg"
     },
     {
       "id": "vci-general-bag",
-      "name": "VCI气相防锈袋",
+      "name": "VCI气相防锈袋（通用型）",
       "category": "vci-rustproof",
       "categoryLabel": "VCI防锈袋系列",
-      "description": "VCI气相防锈袋",
+      "description": "通用型VCI气相防锈袋，适配多行业金属件防锈包装需求，防锈防潮防尘三效合一。广泛用于汽车零部件、新能源电池配件、五金工具、精密模具的仓储与出口运输包装。",
       "image": "/images/uploads/f86832c581c88a7751c00ff84316d0b0.png",
-      "features": []
+      "features": [
+        "防锈、防潮、防尘三效合一",
+        "替代传统涂油工艺，清洁环保省人工",
+        "适用海运出口，防锈期可达2年",
+        "支持定制尺寸、厚度、印刷"
+      ],
+      "specs": [
+        "材质：LDPE/HDPE + VCI防锈母粒",
+        "厚度：0.06-0.20mm 可定制",
+        "宽幅：100-3000mm 可定制",
+        "袋型：平口袋/方底袋/拉链袋可定制"
+      ]
     },
     {
       "id": "vci-heavy-duty-bag",
-      "name": "VCI气相防锈袋",
+      "name": "VCI气相防锈袋（加厚型）",
       "category": "vci-rustproof",
       "categoryLabel": "VCI防锈袋系列",
-      "description": "VCI气相防锈袋",
+      "description": "加厚型VCI气相防锈袋，针对重型金属件、带棱角异形件设计，强度高抗穿刺，配合VCI气相防锈技术提供2-5年长效防锈保护。适用于工程机械配件、大型齿轮、液压缸等出口包装。",
       "image": "/images/uploads/eb29e8ee71709cf4b4a3122d8baaa62d.jpeg",
-      "features": []
+      "features": [
+        "加厚材质，抗穿刺耐磨，保护带棱角金属件",
+        "VCI长效防锈，保护期可达2-5年",
+        "高强度热封，密封性好",
+        "适配重货出口海运场景"
+      ],
+      "specs": [
+        "材质：LDPE/HDPE + VCI防锈母粒（加厚）",
+        "厚度：0.12-0.25mm 可定制",
+        "宽幅：100-3000mm 可定制",
+        "承重：重型设计，可按需加强"
+      ]
     },
     {
       "name": "VCI气相防锈袋",
