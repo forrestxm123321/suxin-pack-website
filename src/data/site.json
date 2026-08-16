@@ -1,36 +1,17 @@
 {
   "SITE": {
-    "shortName": "厦门塑鑫包装",
+    "shortName": "厦门塑鑫包装科技有限公司",
     "logo": "",
     "name": "厦门塑鑫包装科技有限公司",
+    "foundingDate": "2019-12-09",
     "phone": "13606915870",
     "tagline": "VCI气相防锈袋源头生产厂家",
-    "foundingDate": "2019-12-09",
-    "foundingLocation": "厦门市同安区",
-    "sameAs": [
-      "https://www.tianyancha.com/company/3395837944",
-      "https://xm.city8.com/enterprise/8a2xmu72f348b51180"
-    ],
     "url": "https://suxinpack.cn/",
     "companyIntro": "厦门塑鑫包装科技有限公司是VCI气相防锈袋源头生产厂家。公司自有吹膜、印刷、制袋全套生产线。\n主营防锈平口袋、防锈方底袋、空白方底袋、平口袋、拉链袋、双拉链真空袋、铝铂袋及各种工业包装袋。\n专为汽配，新能源，五金，模具，电箱，电柜，工程机械等行业提供防锈，防潮，防尘包装方案。\n环保合规适配出口，自产自销、交期快、价格实在，一站式工业包装解决方案提供商。",
     "notificationEmail": "58704395@qq.com",
     "address": "福建省厦门市同安区同安园178号4楼",
+    "foundingLocation": "厦门市同安区",
     "icp": "",
-    "sgsCertificate": "",
-    "certificates": [
-      {
-        "name": "SGS塑料包装检测报告",
-        "image": "/images/uploads/xmin2605001300pc01_cn.pdf",
-        "desc": "SGS塑料包装检测报告"
-      },
-      {
-        "name": "SGS VCI气相防锈检测报告",
-        "image": "/images/uploads/xmin2605001298pc01_cn.pdf",
-        "desc": "SGS VCI气相防锈检测报告"
-      }
-    ],
-    "email": "info@suxinpack.com",
-    "description": "厦门塑鑫包装科技有限公司是专业VCI气相防锈袋源头生产厂家，自有吹膜、印刷、制袋全套生产线。主营防锈平口袋、防锈方底袋、PE袋、PP袋、拉链袋、真空袋、铝铂袋等工业包装袋，为汽配、新能源、五金、模具等行业提供一站式工业包装解决方案。",
     "faqQuestions": [
       {
         "question": "VCI气相防锈袋的防锈原理是什么？有效期有多久？",
@@ -72,7 +53,26 @@
         "question": "怎么获取报价？",
         "answer": "您可以通过网站联系表单、电话或邮箱联系我们，提供产品类型、尺寸、数量等信息，我们通常在24小时内回复报价。电话：13606915870。"
       }
-    ]
+    ],
+    "sameAs": [
+      "https://www.tianyancha.com/company/3395837944",
+      "https://xm.city8.com/enterprise/8a2xmu72f348b51180"
+    ],
+    "sgsCertificate": "",
+    "certificates": [
+      {
+        "name": "SGS塑料包装检测报告",
+        "image": "/images/uploads/xmin2605001300pc01_cn.pdf",
+        "desc": "SGS塑料包装检测报告"
+      },
+      {
+        "name": "SGS VCI气相防锈检测报告",
+        "image": "/images/uploads/xmin2605001298pc01_cn.pdf",
+        "desc": "SGS VCI气相防锈检测报告"
+      }
+    ],
+    "email": "info@suxinpack.cn",
+    "description": "厦门塑鑫包装科技有限公司是专业VCI气相防锈袋源头生产厂家，自有吹膜、印刷、制袋全套生产线。主营防锈平口袋、防锈方底袋、PE袋、PP袋、拉链袋、真空袋、铝铂袋等工业包装袋，为汽配、新能源、五金、模具等行业提供一站式工业包装解决方案。"
   },
   "NAV_LINKS": [
     {
