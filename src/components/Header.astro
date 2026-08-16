@@ -197,4 +197,34 @@ const currentPath = Astro.url.pathname;
       }
     });
   });
+
+  // 点击菜单内任意链接后自动关闭菜单（防止菜单挡住页面）
+  if (menu) {
+    menu.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        // 关闭整个移动端菜单
+        menu.classList.add('hidden');
+        btn.setAttribute('aria-expanded', 'false');
+        if (iconOpen && iconClose) {
+          iconOpen.classList.remove('hidden');
+          iconClose.classList.add('hidden');
+        }
+        // 收起所有子菜单
+        document.querySelectorAll('.mobile-dropdown-content').forEach((c) => c.classList.add('hidden'));
+        document.querySelectorAll('.dropdown-arrow').forEach((a) => a.classList.remove('rotate-180'));
+      });
+    });
+
+    // 点击菜单外部区域时也关闭菜单
+    document.addEventListener('click', (e) => {
+      if (!menu.classList.contains('hidden') && !menu.contains(e.target) && !btn.contains(e.target)) {
+        menu.classList.add('hidden');
+        btn.setAttribute('aria-expanded', 'false');
+        if (iconOpen && iconClose) {
+          iconOpen.classList.remove('hidden');
+          iconClose.classList.add('hidden');
+        }
+      }
+    });
+  }
 </script>
