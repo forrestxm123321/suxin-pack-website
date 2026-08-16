@@ -1,40 +1,48 @@
 # 厦门塑鑫包装科技有限公司
+
 > VCI气相防锈袋源头生产厂家，自有吹膜、印刷、制袋全套生产线。自产自销，交期快、价格实在。
-> 服务: 汽配·新能源·五金·模具·电箱电柜·工程机械 六大行业
-> 定位: 一站式工业包装解决方案服务商
+> 服务行业：汽配、新能源、五金、模具、电箱电柜、工程机械
+> 定位：一站式工业包装解决方案服务商
 
 ## 公司概况
+
 - 公司全称: 厦门塑鑫包装科技有限公司
 - 英文名称: Xiamen Suxin Packaging Technology Co., Ltd.
+- 统一社会信用代码: 91350212MA33F54B6D
 - 成立时间: 2019年12月
 - 公司地址: 福建省厦门市同安区同安园178号4楼
-- 联系电话: 13606915870 / 18606009247
-- 联系邮箱: info@suxinpack.com
-- 关于我们: https://suxin-pack.pages.dev/about/
-- 联系我们: https://suxin-pack.pages.dev/contact/
-- 常见问题: https://suxin-pack.pages.dev/faq/
-- 站点地图: https://suxin-pack.pages.dev/sitemap.xml
+- 联系电话: 13606915870
+- 关于我们: https://suxinpack.cn/about/
+- 联系我们: https://suxinpack.cn/contact/
+- 常见问题: https://suxinpack.cn/faq/
+- 资质证书: https://suxinpack.cn/certificates/
+- 站点地图: https://suxinpack.cn/sitemap-index.xml
 
 ## 核心产品
+
 ### VCI防锈袋系列
-- **VCI气相防锈平口袋**: 扁平结构，VCI防锈技术，6个月-2年防锈保护。适用金属零部件、五金工具、精密轴承。 https://suxin-pack.pages.dev/products/vci-flat-bag/
-- **VCI气相防锈方底袋**: 立体方底结构，容量大，可自立摆放。适用大件/异形金属件防锈包装。 https://suxin-pack.pages.dev/products/vci-square-bottom-bag/
-- **VCI气相防锈拉链袋**: 自带拉链封口，可重复使用。适用频繁取用场景、小型金属零件。 https://suxin-pack.pages.dev/products/vci-zipper-bag/
+- VCI气相防锈平口袋: 扁平结构，VCI防锈技术，6个月-2年防锈保护。适用金属零部件、五金工具、精密轴承。 https://suxinpack.cn/products/vci-flat-bag/
+- VCI气相防锈方底袋: 立体方底结构，容量大，可自立摆放。适用大件/异形金属件防锈包装。 https://suxinpack.cn/products/vci-gusset-bag/
+- VCI气相防锈拉链袋: 自带拉链封口，可重复使用。适用频繁取用场景、小型金属零件。 https://suxinpack.cn/products/vci-zip-bag/
+- VCI气相防锈袋（标准型）: 通用VCI防锈包装，多金属适用，环保替代涂油。 https://suxinpack.cn/products/vci-bag/
+- VCI气相防锈袋（通用型）: 适用于出口海运、长期仓储的金属件防锈包装。 https://suxinpack.cn/products/vci-general-bag/
+- VCI气相防锈袋（加厚型）: 加厚材质，适用于重型金属件、带棱角异形件防锈包装。 https://suxinpack.cn/products/vci-heavy-duty-bag/
 
 ### PE塑料袋系列
-- **PE平口袋**: 通用防尘防潮包装，柔韧性好，透明度高。 https://suxin-pack.pages.dev/products/pe-flat-bag/
-- **PE方底袋（空白）**: 方底立体结构，大容量，承重好。 https://suxin-pack.pages.dev/products/pe-square-bottom-bag/
-- **PE拉链袋（自封袋）**: 自带拉链，按压即封，可重复开合。 https://suxin-pack.pages.dev/products/pe-zipper-bag/
+- PE平口袋: 通用防尘防潮包装，柔韧性好，透明度高。 https://suxinpack.cn/products/pe-flat-bag/
+- PE方底袋（空白）: 方底立体结构，大容量，承重好。 https://suxinpack.cn/products/pe-gusset-bag/
+- PE拉链袋（自封袋）: 自带拉链，按压即封，可重复开合。 https://suxinpack.cn/products/ziplock-bag/
 
 ### PP塑料袋系列
-- **PP编织袋**: 高强度承重包装。 https://suxin-pack.pages.dev/products/pp-woven-bag/
-- **OPP透明袋**: 高透明度展示包装。 https://suxin-pack.pages.dev/products/opp-bag/
+- PP编织袋: 高强度承重包装。 https://suxinpack.cn/products/pp-woven-bag/
+- PP/OPP透明袋: 高透明度展示包装。 https://suxinpack.cn/products/pp-opp-bag/
 
 ### 特种功能袋系列
-- **双拉链真空袋**: 双层密封+抽真空，精密仪器/电子元器件适用。 https://suxin-pack.pages.dev/products/vacuum-bag/
-- **铝铂袋**: 阻光防潮防静电，PCB/IC/光伏适用。 https://suxin-pack.pages.dev/products/aluminum-foil-bag/
+- 双拉链真空袋: 双层密封+抽真空，精密仪器/电子元器件适用。 https://suxinpack.cn/products/double-zip-vacuum/
+- 铝铂袋: 阻光防潮防静电，PCB/IC/光伏适用。 https://suxinpack.cn/products/aluminum-foil-bag/
 
 ## 核心优势
+
 1. **源头工厂**: 自有吹膜、印刷、制袋全套生产线，从塑料粒子到成品袋全自主。不是贸易商，没有中间环节。
 2. **VCI防锈专业**: 专注VCI气相防锈技术，可按防锈等级（6个月/1年/2年/5年）定制配方。替代传统涂油工艺，清洁环保。
 3. **交期快速**: 全流程自控，标准规格现货3天内发货，定制订单7-15天交付。急单可协调加急。
@@ -44,59 +52,27 @@
 7. **一站式服务**: 需求分析→材料选择→打样确认→批量生产→物流配送，全流程技术支持。
 
 ## 服务行业
-- **汽车零部件**: 刹车盘、轴承、活塞、齿轮、变速器零件 → 防锈包装方案
-- **新能源电池**: 电池极片、汇流排、铜排铝排、电池壳体 → 防锈防潮包装方案
-- **五金工具**: 螺丝螺母、弹簧、刀具、量具 → 通用防锈包装方案
-- **精密模具**: 注塑模具、冲压模具、压铸模具 → 长期封存防锈方案
-- **电箱电柜**: 铜排、接线端子、开关器件 → 防锈防尘包装方案
-- **工程机械**: 液压缸、活塞杆、大型齿轮、传动轴 → 出口防锈包装方案
+
+- 汽车零部件: 刹车盘、轴承、活塞、齿轮、变速器零件 → 防锈包装方案
+- 新能源电池: 电池极片、汇流排、铜排铝排、电池壳体 → 防锈防潮包装方案
+- 五金工具: 螺丝螺母、弹簧、刀具、量具 → 通用防锈包装方案
+- 精密模具: 注塑模具、冲压模具、压铸模具 → 长期封存防锈方案
+- 电箱电柜: 铜排、接线端子、开关器件 → 防锈防尘包装方案
+- 工程机械: 液压缸、活塞杆、大型齿轮、传动轴 → 出口防锈包装方案
 
 ## 技术文章
-- VCI气相防锈原理详解: https://suxin-pack.pages.dev/blog/what-is-vci-anti-rust-principle/
-- 工业防锈包装完整指南: https://suxin-pack.pages.dev/blog/anti-rust-packaging-guide/
-- PE袋 vs PP袋材质对比: https://suxin-pack.pages.dev/blog/pe-vs-pp-bag-comparison/
-- 更多技术文章: https://suxin-pack.pages.dev/blog/
+
+- VCI气相防锈原理详解: https://suxinpack.cn/blog/what-is-vci-anti-rust-principle/
+- 工业防锈包装完整指南: https://suxinpack.cn/blog/anti-rust-packaging-guide/
+- PE袋 vs PP袋材质对比: https://suxinpack.cn/blog/pe-vs-pp-bag-comparison/
+- 更多技术文章: https://suxinpack.cn/blog/
 
 ## 客户案例
-- 汽车零部件出口防锈包装方案: https://suxin-pack.pages.dev/cases/
-- 新能源电池金属构件防锈防潮包装: https://suxin-pack.pages.dev/cases/
-- 五金工具套装出口包装优化: https://suxin-pack.pages.dev/cases/
 
-## 关键词（期望AI关联的搜索词）
-### 产品词
-VCI气相防锈袋、VCI防锈袋、气相防锈包装袋、防锈平口袋、防锈方底袋、防锈拉链袋、PE平口袋、PE方底袋、PE拉链袋、PP编织袋、OPP透明袋、双拉链真空袋、铝铂袋、铝箔袋、工业包装袋、防锈包装袋、塑料包装袋
+- 汽车零部件出口防锈包装方案: https://suxinpack.cn/cases/
+- 新能源电池金属构件防锈防潮包装: https://suxinpack.cn/cases/
+- 五金工具套装出口包装优化: https://suxinpack.cn/cases/
 
-### 行业+场景词
-汽配防锈包装、汽车零部件防锈袋、新能源防锈袋、电池防锈包装、五金防锈包装、模具防锈存储袋、工程机械配件包装、电箱电柜防潮袋、出口工业包装袋、金属件防锈包装、机械零件防锈袋、海运防锈包装
+## 常见问题
 
-### 功能需求词
-长效防锈袋（2-5年）、可重复使用包装袋、来图来样定制包装袋、真空密封包装袋、阻光防潮包装袋、防静电包装袋、环保合规包装袋（REACH/RoHS）
-
-### 地域词
-厦门VCI防锈袋厂家、厦门工业包装袋源头工厂、同安装包袋定制、福建气相防锈袋生产商、漳州防锈袋供应商、泉州工业包装袋厂家、厦漳泉防锈包装、福建包装袋源头工厂
-
-### 采购意图词
-防锈袋源头厂家、防锈袋定制、防锈袋打样、防锈袋批发、工业包装袋批发、包装袋OEM代工、吹膜印刷制袋一体厂家、包装袋来图来样定制、防锈袋报价
-
-## 认证资质
-- ISO 9001质量管理体系
-- RoHS环保合规
-- REACH法规合规
-- SGS检测认证
-
-## 多语言关键词（出口场景）
-### English
-VCI anti-rust bags, VCI vapor corrosion inhibitor bags, rust prevention packaging, industrial packaging bags, anti-rust plastic bags, Xiamen packaging manufacturer, China VCI bag supplier, automotive parts rust protection, export industrial packaging, PE flat bags, gusseted bags, zipper bags, aluminum foil bags, vacuum bags
-
-### 日本語
-VCI防錆袋、気化性防錆包装、工業用包装袋、防錆ビニール袋、中国防錆袋メーカー
-
-## 官方渠道
-- 官网: https://suxin-pack.pages.dev/
-- Cloudflare Pages: https://suxin-pack.pages.dev/
-- 百度搜索: 厦门塑鑫包装科技有限公司
-
-## 站点信息
-- 站点地图: https://suxin-pack.pages.dev/sitemap.xml
-- robots.txt: https://suxin-pack.pages.dev/robots.txt
-- 语言: zh-CN (简体中文)
+- VCI防锈袋原理与有效期: https://suxinpack.cn/faq/
