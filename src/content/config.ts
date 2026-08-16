@@ -7,6 +7,7 @@ const articles = defineCollection({
     date: z.string().optional(),
     category: z.string(),
     keywords: z.array(z.string()),
+    author: z.string().optional().default('塑鑫包装技术团队'),
   }),
 });
 
