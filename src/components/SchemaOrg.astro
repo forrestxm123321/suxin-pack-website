@@ -155,8 +155,10 @@ function articleSchema() {
     'datePublished': data.date,
     'dateModified': data.dateModified || data.date,
     'author': {
-      '@type': 'Organization',
-      'name': SITE.name,
+      '@type': 'Person',
+      'name': data.author || '塑鑫包装技术团队',
+      'jobTitle': '防锈包装技术团队',
+      'worksFor': { '@id': `${SITE.url}#organization` },
     },
     'publisher': { '@id': `${SITE.url}#organization` },
     'keywords': data.keywords?.join(', '),
