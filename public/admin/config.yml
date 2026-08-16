@@ -48,6 +48,13 @@ collections:
               - { label: "ICP备案号", name: "icp", widget: "string", required: false }
               - { label: "公司Logo", name: "logo", widget: "image", hint: "上传公司Logo，建议正方形PNG，尺寸 200x200 以上", required: false }
               - { label: "SGS证书", name: "sgsCertificate", widget: "file", hint: "上传SGS检测证书，支持 PDF / JPG / PNG", required: false }
+              - label: "常见问题列表"
+                name: "faqQuestions"
+                widget: "list"
+                hint: "首页和FAQ页面的问答内容，可自由增删改"
+                fields:
+                  - { label: "问题", name: "question", widget: "string" }
+                  - { label: "回答", name: "answer", widget: "text" }
           - name: "certificates"
             label: "资质证书列表"
             widget: "list"
